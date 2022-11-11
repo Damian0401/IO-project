@@ -1,4 +1,4 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import "./leaf.css";
 
 interface Department {
@@ -31,11 +31,12 @@ export default function Map() {
 
     return (
         <>
-            <MapContainer center={[51.1078852, 17.0385376]} zoom={14} scrollWheelZoom={true}>
+            <MapContainer center={[51.1078852, 17.0385376]} zoom={14} scrollWheelZoom={true} zoomControl={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <ZoomControl position='bottomright' />
                 {departments.map(department => (
                     <Marker position={[department.x, department.y]}>
                         <Popup>

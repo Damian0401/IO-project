@@ -15,6 +15,7 @@ export default function ToggleThemeButton() {
             aria-label='toggle theme'
             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} 
             onClick={toggleColorMode}
+            zIndex={1}
         />
     )
 }

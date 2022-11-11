@@ -15,20 +15,19 @@ const theme = extendTheme({
                 color: mode('blackAlpha.700', 'whiteAlpha.600')(props),
                 margin: 0,
                 padding: 0,
-            },
-            '&::-webkit-scrollbar': {
-                width: '1rem',
-                borderRadius: '2rem',
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-            '&::-webkit-scrollbar-thumb': {
-                borderRadius: '2rem',
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-            components: {
-                
             }
         })
+    },
+    components: {
+        Button: {
+            variants: {
+                'navbar-menu': {
+                    _hover: {
+                        bgColor: 'whiteAlpha.300'
+                    }
+                }
+            }
+        }
     },
 });
 

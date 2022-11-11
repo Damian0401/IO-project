@@ -1,31 +1,28 @@
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
+import { Department } from "../../models/Department";
 import "./leaf.css";
-
-interface Department {
-    x: number;
-    y: number;
-    description: string;
-}
+import MapMaker from "./MapMarker";
 
 export default function Map() {
 
-    const url = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngitem.com%2Fpimgs%2Fm%2F135-1359965_transparent-carrots-png-vegetable-carrot-png-download.png&f=1&nofb=1&ipt=d95e94cc1dc182d7d2f2c327ace0bf6d0fed497ed581fd97a994774904245647&ipo=images';
-
     const departments: Department[] = [
         {
+            id: '1',
             x: 51.1078852,
             y: 17.0385376,
-            description: 'There will be one of the CarrotRent departments'
+            location: 'There will be one of the CarrotRent departments'
         },
         {
+            id: '2',
             x: 51.1151852,
             y: 17.0525376,
-            description: 'There will be one of the CarrotRent departments'
+            location: 'There will be one of the CarrotRent departments'
         },
         {
+            id: '3',
             x: 51.1125852,
             y: 17.0275376,
-            description: 'There will be one of the CarrotRent departments'
+            location: 'There will be one of the CarrotRent departments'
         },
     ];
 
@@ -38,12 +35,7 @@ export default function Map() {
                 />
                 <ZoomControl position='bottomright' />
                 {departments.map(department => (
-                    <Marker position={[department.x, department.y]}>
-                        <Popup>
-                            {department.description}
-                            <img src={url} style={{ height: '30px', width: '30px' }} />
-                        </Popup>
-                    </Marker>
+                    <MapMaker department={department} key={department.id} />
                 ))}
             </MapContainer>
         </>

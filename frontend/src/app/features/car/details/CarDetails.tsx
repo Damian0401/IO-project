@@ -9,7 +9,7 @@ export default function CarDetails() {
 
     return (
         <>
-            <Center height='100vh'>
+            <Center height='100%'>
                 Details of the car with id: {id}
             </Center>
         </>

@@ -8,7 +8,7 @@ export default function DepartmentDetails() {
 
     return (
         <>
-            <Center height='100vh'>
+            <Center height='100%'>
                 <Flex direction='column'>
                     <Text>
                         This is department with id: {id}

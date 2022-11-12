@@ -12,7 +12,7 @@ import ToggleThemeButton from "./ToggleThemeButton";
 
 function App() {
   return (
-    <>
+    <div style={{ height: '93vh'}}>
       <ToggleThemeButton />
       <Routes>
         <Route element={<Navbar />}>
@@ -27,7 +27,7 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

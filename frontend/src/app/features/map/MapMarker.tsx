@@ -17,7 +17,7 @@ export default function MapMaker({ department }: Props) {
                 <Popup>
                     {department.location}
                     <img src={url} style={{ height: '30px', width: '30px' }} />
-                    <Button as={Link} to={`/department/${department.id}`}>
+                    <Button as={Link} to={`/departments/${department.id}`}>
                         View
                     </Button>
                 </Popup>

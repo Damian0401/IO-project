@@ -1,4 +1,4 @@
-import { Center } from "@chakra-ui/react";
+import { Center, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 
@@ -11,9 +11,9 @@ export default function CarList() {
 
     return (
         <>
-            <Center height='100vh'>
-                List of cars with id: {id}
-            </Center>
+            <Text>
+                List of cars of department with id: {id}
+            </Text>
         </>
     )
 }

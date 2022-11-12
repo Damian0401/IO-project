@@ -1,5 +1,6 @@
-import { Center } from "@chakra-ui/react";
+import { Box, Center, Container, Flex, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import CarList from "../../car/list/CarList";
 
 export default function DepartmentDetails() {
 
@@ -8,7 +9,12 @@ export default function DepartmentDetails() {
     return (
         <>
             <Center height='100vh'>
-                This is department with id: {id} 
+                <Flex direction='column'>
+                    <Text>
+                        This is department with id: {id}
+                    </Text>
+                    <CarList />
+                </Flex>
             </Center>
         </>
     )

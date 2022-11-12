@@ -11,7 +11,7 @@ export default function DepartmentListItem({id}: Props) {
 
     return (
         <>
-            <Button as={Link} to={`/department/${id}`} variant='ghost'>
+            <Button as={Link} to={`/departments/${id}`} variant='ghost'>
                 This is department with id: {id}
             </Button>
         </>

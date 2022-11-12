@@ -25,7 +25,7 @@ export default function Navbar() {
                         <MenuItem icon={<Search2Icon />} as={Link} to ='/map'>
                             Map
                         </MenuItem>
-                        <MenuItem icon={<ViewIcon />} as={Link} to ='/department'>
+                        <MenuItem icon={<ViewIcon />} as={Link} to ='/departments'>
                             Departments
                         </MenuItem>
                     </MenuList>

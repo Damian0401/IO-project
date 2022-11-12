@@ -21,10 +21,7 @@ function App() {
           <Route path='map' element={<Map />} />
           <Route path='departments'>
             <Route index element={<DepartmentDashboard />} />
-            <Route path=':id'>
-              <Route index element={<DepartmentDetails />} />
-              <Route path='cars' element={<CarList />} />
-            </Route>
+            <Route path=':id' element={<DepartmentDetails />} />
           </Route>
           <Route path='cars/:id' element={<CarDetails />} />
           <Route path='*' element={<NotFound />} />

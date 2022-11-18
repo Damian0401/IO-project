@@ -16,9 +16,13 @@ public class User
     public string Email { get; set; } = default!;
     public Guid? DepartmentId { get; set; } 
     public Guid RoleId { get; set; }
+    public Guid UserDataId { get; set; }
 
+    public UserData UserData { get; set; } = default!;
     public Role Role { get; set; } = default!;
     public Department Department { get; set; } = default!;
-    public ICollection<Rent> Rents { get; set; } = default!;
+    public ICollection<Rent> OwnRentings { get; set; } = default!;
+    public ICollection<Rent> IssuedRentings { get; set; } = default!;
+    public ICollection<Rent> RecievedRentings { get; set; } = default!;
     public ICollection<Department> OwnedDepartments { get; set; } = default!;
 }

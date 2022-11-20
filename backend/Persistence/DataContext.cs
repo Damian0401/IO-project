@@ -110,7 +110,7 @@ public class DataContext : DbContext
     public DbSet<RentStatus> RentStatuses { get; set; } = default!;
     public DbSet<Role> Roles { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
-    public DbSet<UserData> UserDatas { get; set; } = default!;
+    public DbSet<UserData> UserData { get; set; } = default!;
     public DbSet<Vehicle> Vehicles { get; set; } = default!;
     public DbSet<VehicleStatus> VehicleStatuses { get; set; } = default!;
 }

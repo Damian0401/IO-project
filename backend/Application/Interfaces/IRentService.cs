@@ -6,7 +6,7 @@ namespace Application.Interfaces
     {
         Guid Create(CreateRentDtoRequest dto);
         bool Issue(Guid id);
-        bool Recieve(Guid id);
+        bool Receive(Guid id);
         GetRentByIdDtoResponse? GetById(Guid id);
         GetActiveRentsDtoResponse GetActive();
         GetArchivedRentsDtoResponse GetArchived();

@@ -35,7 +35,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public bool Recieve(Guid id)
+        public bool Receive(Guid id)
         {
             throw new NotImplementedException();
         }

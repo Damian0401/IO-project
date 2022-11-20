@@ -28,5 +28,10 @@ namespace Application.Services
         {
             throw new NotImplementedException();
         }
+
+        public Guid Create(CreateVehicleDtoRequest dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

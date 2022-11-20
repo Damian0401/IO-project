@@ -8,5 +8,6 @@ namespace Application.Interfaces
         GetVehicleByIdDtoResponse GetById(Guid id);
         bool Update(Guid id, UpdateVehicleDtoRequest dto); 
         bool Delete(Guid id);
+        Guid Create(CreateVehicleDtoRequest dto);
     }
 }

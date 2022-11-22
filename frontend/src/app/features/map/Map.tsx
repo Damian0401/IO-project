@@ -1,28 +1,31 @@
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
-import { Department } from "../../models/Department";
+import { DepartmentMarker } from "../../models/Department";
 import "./leaf.css";
 import MapMaker from "./MapMarker";
 
 export default function Map() {
 
-    const departments: Department[] = [
+    const departments: DepartmentMarker[] = [
         {
             id: '1',
-            x: 51.1078852,
-            y: 17.0385376,
-            location: 'There will be one of the CarrotRent departments'
+            xPosition: 51.1078852,
+            yPosition: 17.0385376,
+            name: 'There will be one of the CarrotRent departments',
+            address: 'This is the address of the department'
         },
         {
             id: '2',
-            x: 51.1151852,
-            y: 17.0525376,
-            location: 'There will be one of the CarrotRent departments'
+            xPosition: 51.1151852,
+            yPosition: 17.0525376,
+            name: 'There will be one of the CarrotRent departments',
+            address: 'This is the address of the department'
         },
         {
             id: '3',
-            x: 51.1125852,
-            y: 17.0275376,
-            location: 'There will be one of the CarrotRent departments'
+            xPosition: 51.1125852,
+            yPosition: 17.0275376,
+            name: 'There will be one of the CarrotRent departments',
+            address: 'This is the address of the department'
         },
     ];
 

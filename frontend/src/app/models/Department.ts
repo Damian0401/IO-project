@@ -1,9 +1,25 @@
+import { Vehicle } from "./Vehicle";
 
 
 
 export interface Department {
     id: string;
-    x: number;
-    y: number;
-    location: string;
+    name: string;
+    address: string;
+}
+
+export interface DepartmentMarker {
+    id: string;
+    name: string;
+    address: string;
+    xPosition: number;
+    yPosition: number;
+}
+
+export interface DepartmentDetails {
+    id: string;
+    name: string;
+    vehicles: Vehicle[],
+    manager: string;
+    address: string;
 }

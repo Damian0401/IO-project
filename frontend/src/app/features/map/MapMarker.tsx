@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/react";
 import { Marker, Popup } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { Department } from "../../models/Department";
+import { DepartmentMarker } from "../../models/Department";
 
 interface Props {
-    department: Department
+    department: DepartmentMarker
 }
 
 export default function MapMaker({ department }: Props) {
@@ -13,9 +13,10 @@ export default function MapMaker({ department }: Props) {
 
     return (
         <>
-            <Marker position={[department.x, department.y]} key={`${department.x} ${department.y}`}>
+            <Marker position={[department.xPosition, department.yPosition]} key={`${department.xPosition} ${department.yPosition}`}>
                 <Popup>
-                    {department.location}
+                    <b>{department.name}</b> <br/>
+                    {department.address}
                     <img src={url} style={{ height: '30px', width: '30px' }} />
                     <Button as={Link} to={`/departments/${department.id}`}>
                         View

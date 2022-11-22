@@ -1,10 +1,38 @@
 import { Box, Center, Container, Flex, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import CarList from "../../car/list/CarList";
+import VehicleList from "../../vehicle/list/VehicleList";
+import {DepartmentDetails as Department} from "../../../models/Department";
 
 export default function DepartmentDetails() {
 
     const { id } = useParams<{ id: string }>();
+
+    const department: Department = {
+        id: id || 'id',
+        name: 'test',
+        address: 'test',
+        manager: 'test',
+        vehicles: [
+            {
+                id: '1',
+                imageUrl: 'test',
+                model: 'test',
+                status: 'test'
+            },
+            {
+                id: '2',
+                imageUrl: 'test',
+                model: 'test',
+                status: 'test'
+            },
+            {
+                id: '3',
+                imageUrl: 'test',
+                model: 'test',
+                status: 'test'
+            },
+        ]
+    }
 
     return (
         <>
@@ -13,7 +41,7 @@ export default function DepartmentDetails() {
                     <Text>
                         This is department with id: {id}
                     </Text>
-                    <CarList />
+                    <VehicleList vehicles={department.vehicles} />
                 </Flex>
             </Center>
         </>

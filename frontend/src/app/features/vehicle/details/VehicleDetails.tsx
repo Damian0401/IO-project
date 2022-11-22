@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 
 
-export default function CarDetails() {
+export default function VehicleDetails() {
 
     const { id } = useParams<{ id: string }>();
 

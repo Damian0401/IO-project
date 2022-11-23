@@ -1,19 +1,39 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex, Heading, HStack, Spacer, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { Department } from "../../../models/Department";
 
 
 interface Props {
-    id: string;
+    department: Department;
 }
 
-export default function DepartmentListItem({id}: Props) {
+export default function DepartmentListItem({ department }: Props) {
 
 
     return (
         <>
-            <Button as={Link} to={`/departments/${id}`} variant='ghost'>
-                This is department with id: {id}
-            </Button>
+            <Stack
+                _hover={{ bgColor: 'green.400' }}
+                p='3' borderRadius='0.5rem'
+                >
+                <Heading size='sm'>
+                    test
+                </Heading>
+                <Flex>
+                    <Text>
+                        {department.address}
+                    </Text>
+                    <Spacer />
+                    <Button
+                        size='sm'
+                        colorScheme='teal'
+                        as={Link}
+                        to={`/departments/${department.id}`}
+                    >
+                        View
+                    </Button>
+                </Flex>
+            </Stack>
         </>
     )
 }

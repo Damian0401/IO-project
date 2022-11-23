@@ -27,7 +27,7 @@ const theme = extendTheme({
                     }
                 }
             }
-        }
+        },
     },
 });
 

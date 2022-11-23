@@ -11,7 +11,7 @@ import ToggleThemeButton from "./ToggleThemeButton";
 
 function App() {
   return (
-    <div style={{ height: '93vh'}}>
+    <div style={{ height: '93vh', width: '100vw'}}>
       <ToggleThemeButton />
       <Routes>
         <Route element={<Navbar />}>
@@ -22,7 +22,7 @@ function App() {
             <Route index element={<DepartmentDashboard />} />
             <Route path=':id' element={<DepartmentDetails />} />
           </Route>
-          <Route path='cars/:id' element={<VehicleDetails />} />
+          <Route path='vehicles/:id' element={<VehicleDetails />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

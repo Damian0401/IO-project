@@ -1,7 +1,10 @@
-import { Box, Center, Container, Flex, Text } from "@chakra-ui/react";
+import { Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import VehicleList from "../../vehicle/list/VehicleList";
-import {DepartmentDetails as Department} from "../../../models/Department";
+import { DepartmentDetails as Department } from "../../../models/Department";
+import { CardBody, CardHeader } from "@chakra-ui/card";
+import ContentCard from "../../../common/shared/ContentCard";
+import { imagePlaceholder } from "../../../common/utils/constants";
 
 export default function DepartmentDetails() {
 
@@ -15,19 +18,19 @@ export default function DepartmentDetails() {
         vehicles: [
             {
                 id: '1',
-                imageUrl: 'test',
+                imageUrl: imagePlaceholder,
                 model: 'test',
                 status: 'test'
             },
             {
                 id: '2',
-                imageUrl: 'test',
+                imageUrl: imagePlaceholder,
                 model: 'test',
                 status: 'test'
             },
             {
                 id: '3',
-                imageUrl: 'test',
+                imageUrl: imagePlaceholder,
                 model: 'test',
                 status: 'test'
             },
@@ -36,14 +39,25 @@ export default function DepartmentDetails() {
 
     return (
         <>
-            <Center height='100%'>
-                <Flex direction='column'>
-                    <Text>
-                        This is department with id: {id}
-                    </Text>
-                    <VehicleList vehicles={department.vehicles} />
-                </Flex>
-            </Center>
+            <ContentCard backUrl={'/departments'}>
+                <CardHeader>
+                    <Heading>
+                        {department.name}
+                    </Heading>
+                </CardHeader>
+                <CardBody>
+                    <Stack divider={<StackDivider />} spacing='4' maxHeight='80vh'>
+                        <StackDivider />
+                        <Text>
+                            Address: {department.address}
+                        </Text>
+                        <Text>
+                            Manager: {department.manager}
+                        </Text>
+                        <VehicleList vehicles={department.vehicles} />
+                    </Stack>
+                </CardBody>
+            </ContentCard>
         </>
     )
 }

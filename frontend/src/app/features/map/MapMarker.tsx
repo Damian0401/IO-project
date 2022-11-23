@@ -9,16 +9,13 @@ interface Props {
 
 export default function MapMaker({ department }: Props) {
 
-    const url = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngitem.com%2Fpimgs%2Fm%2F135-1359965_transparent-carrots-png-vegetable-carrot-png-download.png&f=1&nofb=1&ipt=d95e94cc1dc182d7d2f2c327ace0bf6d0fed497ed581fd97a994774904245647&ipo=images';
-
     return (
         <>
             <Marker position={[department.xPosition, department.yPosition]} key={`${department.xPosition} ${department.yPosition}`}>
                 <Popup>
                     <b>{department.name}</b> <br/>
-                    {department.address}
-                    <img src={url} style={{ height: '30px', width: '30px' }} />
-                    <Button as={Link} to={`/departments/${department.id}`}>
+                    {department.address} <br/>
+                    <Button as={Link} className='marker-button' colorScheme='teal' to={`/departments/${department.id}`}>
                         View
                     </Button>
                 </Popup>

@@ -1,22 +1,21 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex, Stack, StackDivider } from "@chakra-ui/react"
+import { Department } from "../../../models/Department"
 import DepartmentListItem from "./DepartmentListItem"
 
+interface Props {
+    departments: Department[]
+}
 
-
-export default function DepartmentList() {
-
-    const ids = [
-        '1',
-        '2',
-        '3',
-    ]
+export default function DepartmentList({departments}: Props) {
 
     return (
         <>
-            <Flex direction='column'>
-                {ids.map(id => (
-                    <DepartmentListItem id={id} key={id} />
-                ))}
+            <Flex direction='column' maxHeight='80vh'>
+                <Stack divider={<StackDivider />} spacing='4' overflow='auto'>
+                    {departments.map(department => (
+                        <DepartmentListItem department={department} key={department.id} />
+                    ))}
+                </Stack>
             </Flex>
         </>
     )

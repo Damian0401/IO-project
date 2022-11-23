@@ -17,6 +17,6 @@ export interface VehicleDetails {
     seats: number;
     description: string;
     status: string;
-    department: string;
+    departmentId: string;
     price: number;
 }

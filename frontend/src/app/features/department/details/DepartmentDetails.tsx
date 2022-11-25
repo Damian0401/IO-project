@@ -39,7 +39,7 @@ export default function DepartmentDetails() {
 
     return (
         <>
-            <ContentCard backUrl={'/departments'}>
+            <ContentCard>
                 <CardHeader>
                     <Heading>
                         {department.name}

@@ -2,14 +2,13 @@ import { Card } from "@chakra-ui/card";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Button, Center, Container, IconButton, useColorMode } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { history } from "../../../index";
 
-interface Props {
-    backUrl?: string;
-}
 
-const ContentCard = ({ children, backUrl }: PropsWithChildren<Props>) => {
+const ContentCard = ({ children }: PropsWithChildren) => {
     const { colorMode } = useColorMode();
+    const navigation = useNavigate();
 
     return (
         <Center>
@@ -20,16 +19,16 @@ const ContentCard = ({ children, backUrl }: PropsWithChildren<Props>) => {
                 borderRadius='1rem'
                 bgColor={colorMode === 'light' ? 'whiteAlpha.500' : 'blackAlpha.500'}
             >
-                {backUrl && <IconButton
+                <IconButton
                     aria-label="back-button"
                     size='xs' position='absolute'
                     top='0' right='0'
                     icon={<ArrowBackIcon />}
-                    as={Link} to={backUrl}
+                    onClick={() => navigation(-1)}
                     borderRadius='0'
                     borderTopRightRadius='1rem'
                     borderBottomLeftRadius='0.5rem'
-                />}
+                />
                 {children}
             </Card>
         </Center>

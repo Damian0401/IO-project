@@ -1,4 +1,4 @@
-import { CalendarIcon, ChevronRightIcon, EditIcon, HamburgerIcon, Search2Icon, ViewIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, AtSignIcon, CalendarIcon, ChevronRightIcon, EditIcon, HamburgerIcon, Search2Icon, ViewIcon } from "@chakra-ui/icons";
 import { Center, Flex, HStack, Icon, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from "@chakra-ui/react";
 import { Link, Outlet } from "react-router-dom";
 
@@ -26,10 +26,13 @@ export default function Navbar() {
                             <MenuItem icon={<Search2Icon />} as={Link} to='/map'>
                                 Map
                             </MenuItem>
-                            <MenuItem icon={<ViewIcon />} as={Link} to='/departments'>
+                            <MenuItem icon={<AtSignIcon />} as={Link} to='/departments'>
                                 Departments
                             </MenuItem>
-                            <MenuItem icon={<ChevronRightIcon />} as={Link} to='/login'>
+                            <MenuItem icon={<ViewIcon/>} as={Link} to='/vehicles'>
+                                Vehicles
+                            </MenuItem>
+                            <MenuItem icon={<ArrowForwardIcon />} as={Link} to='/login'>
                                 Login
                             </MenuItem>
                             <MenuItem icon={<EditIcon />} as={Link} to='/register'>

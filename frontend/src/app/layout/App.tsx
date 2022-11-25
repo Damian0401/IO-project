@@ -9,6 +9,7 @@ import Map from "../features/map/Map";
 import Navbar from "./Navbar";
 import ToggleThemeButton from "./ToggleThemeButton";
 import RegisterForm from "../features/account/RegisterForm";
+import VehicleDashboard from "../features/vehicle/dashboard/VehicleDashboard";
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
             <Route index element={<DepartmentDashboard />} />
             <Route path=':id' element={<DepartmentDetails />} />
           </Route>
-          <Route path='vehicles/:id' element={<VehicleDetails />} />
+          <Route path='vehicles'>
+            <Route index element={<VehicleDashboard />} />
+            <Route path=':id' element={<VehicleDetails />} />
+          </Route>
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

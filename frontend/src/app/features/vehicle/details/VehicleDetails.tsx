@@ -13,7 +13,6 @@ export default function VehicleDetails() {
 
     const vehicle: Vehicle = {
         id: id || 'id',
-        departmentId: '1',
         brand: 'brand',
         fuel: 'fuel',
         imageUrl: imagePlaceholder,
@@ -34,7 +33,7 @@ export default function VehicleDetails() {
 
     return (
         <>
-            <ContentCard backUrl={`/departments/${vehicle.departmentId}`}>
+            <ContentCard>
                 <Grid
                     minHeight='30vh'
                     templateRows='repeat(5, 1fr)'

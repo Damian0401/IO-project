@@ -8,6 +8,7 @@ import HomePage from "../features/home/HomePage";
 import Map from "../features/map/Map";
 import Navbar from "./Navbar";
 import ToggleThemeButton from "./ToggleThemeButton";
+import RegisterForm from "../features/account/RegisterForm";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route element={<Navbar />}>
           <Route index element={<HomePage />} />
           <Route path='login' element={<LoginForm />} />
+          <Route path='register' element={<RegisterForm />} />
           <Route path='map' element={<Map />} />
           <Route path='departments'>
             <Route index element={<DepartmentDashboard />} />

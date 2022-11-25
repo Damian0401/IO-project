@@ -22,12 +22,13 @@ export default function VehicleDetails() {
         price: 1,
         seats: 1,
         status: 'status',
-        yearOfProduction: 2000
+        yearOfProduction: 2000,
+        department: 'department',
     }
 
     const imageStyles: CSSProperties = {
-        height: '15rem',
-        width: '15rem',
+        height: '16rem',
+        width: '16rem',
         borderRadius: '0.5rem'
     }
 
@@ -67,6 +68,9 @@ export default function VehicleDetails() {
                         </Text>
                         <Text>
                             price per day: <b>{vehicle.price}$</b>
+                        </Text>
+                        <Text>
+                            department: <b>{vehicle.department}</b>
                         </Text>
                     </GridItem>
                     <GridItem colSpan={5} position='relative'>

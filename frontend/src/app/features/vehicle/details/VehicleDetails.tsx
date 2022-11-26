@@ -51,25 +51,25 @@ export default function VehicleDetails() {
                             {vehicle.description}
                         </Text>
                         <Text>
-                            Brand: <b>{vehicle.brand}</b>
+                            <b>Brand:</b> {vehicle.brand}
                         </Text>
                         <Text>
-                            Fuel: <b>{vehicle.fuel}</b>
+                            <b>Fuel:</b> {vehicle.fuel}
                         </Text>
                         <Text>
-                            Year of production: <b>{vehicle.yearOfProduction}</b>
+                            <b>Year of production:</b> {vehicle.yearOfProduction}
                         </Text>
                         <Text>
-                            Seats: <b>{vehicle.seats}</b>
+                            <b>Seats:</b> {vehicle.seats}
                         </Text>
                         <Text>
-                            Status: <b>{vehicle.status}</b>
+                            <b>Status:</b> {vehicle.status}
                         </Text>
                         <Text>
-                            Price per day: <b>{vehicle.price}$</b>
+                            <b>Price per day:</b> {vehicle.price}$
                         </Text>
                         <Text>
-                            Department: <b>{vehicle.department}</b>
+                            <b>Department:</b> {vehicle.department}
                         </Text>
                     </GridItem>
                     <GridItem colSpan={5} position='relative'>

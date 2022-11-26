@@ -10,6 +10,8 @@ import Navbar from "./Navbar";
 import ToggleThemeButton from "./ToggleThemeButton";
 import RegisterForm from "../features/account/RegisterForm";
 import VehicleDashboard from "../features/vehicle/dashboard/VehicleDashboard";
+import RentDashboard from "../features/rent/dashboard/RentDashboard";
+import RentDetails from "../features/rent/details/RentDetails";
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
           <Route path='vehicles'>
             <Route index element={<VehicleDashboard />} />
             <Route path=':id' element={<VehicleDetails />} />
+          </Route>
+          <Route path='rents'>
+            <Route index element={<RentDashboard />} />
+            <Route path=':id' element={<RentDetails />} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Route>

@@ -17,7 +17,7 @@ export default function DepartmentListItem({ department }: Props) {
                 p='3' borderRadius='0.5rem'
                 >
                 <Heading size='sm'>
-                    test
+                    {department.name}
                 </Heading>
                 <Flex>
                     <Text>

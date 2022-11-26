@@ -1,4 +1,4 @@
-import { Vehicle } from "./Vehicle";
+import { Vehicle, VehicleForRent } from "./Vehicle";
 
 
 export interface Rent {
@@ -10,11 +10,11 @@ export interface Rent {
 
 export interface RentDetails {
     id: string;
-    status: string;
-    startDate: Date;
+    startDate?: Date;
     endDate?: Date;
     client: string;
-    renter: string;
+    renter?: string;
     receiver?: string;
-    vehicle: Vehicle;
+    vehicle: VehicleForRent;
+    status: string;
 }

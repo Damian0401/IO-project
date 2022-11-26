@@ -20,3 +20,10 @@ export interface VehicleDetails {
     department: string;
     price: number;
 }
+
+export interface VehicleForRent {
+    id: string;
+    model: string;
+    brand: string;
+    yearOfProduction: number;
+}

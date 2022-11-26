@@ -32,6 +32,9 @@ export default function Navbar() {
                             <MenuItem icon={<ViewIcon/>} as={Link} to='/vehicles'>
                                 Vehicles
                             </MenuItem>
+                            <MenuItem icon={<CalendarIcon/>} as={Link} to='/rents'>
+                                Rents
+                            </MenuItem>
                             <MenuItem icon={<ArrowForwardIcon />} as={Link} to='/login'>
                                 Login
                             </MenuItem>

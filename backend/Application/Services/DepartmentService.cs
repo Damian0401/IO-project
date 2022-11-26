@@ -9,6 +9,12 @@ namespace Application.Services
 {
     public class DepartmentService : IDepartmentService
     {
+        private readonly IDepartmentRepository _departmentRepository;
+
+        public DepartmentService(IDepartmentRepository departmentRepository)
+        {
+            _departmentRepository = departmentRepository;
+        }
         public GetAllDepartmentsDtoResponse GetAll()
         {
             throw new NotImplementedException();

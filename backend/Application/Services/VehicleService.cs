@@ -9,6 +9,13 @@ namespace Application.Services
 {
     public class VehicleService : IVehicleService
     {
+        private readonly IVehicleRepository _vehicleRepository;
+
+        public VehicleService(IVehicleRepository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
+
         public GetVehiclesDtoResponse GetFiltered(GetVehiclesDtoRequest dto)
         {
             throw new NotImplementedException();

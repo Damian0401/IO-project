@@ -5,6 +5,12 @@ namespace Application.Services
 {
     public class RentService : IRentService
     {
+        private readonly IRentRepository _rentRepository;
+
+        public RentService(IRentRepository rentRepository)
+        {
+            _rentRepository = rentRepository;
+        }
         public bool Cancel(Guid id)
         {
             throw new NotImplementedException();

@@ -97,6 +97,9 @@ public class DataContext : DbContext
         builder.Entity<Vehicle>()
            .HasIndex(x => x.Vin)
            .IsUnique();
+        builder.Entity<User>()
+            .HasIndex(x => x.Login)
+            .IsUnique();
     }
 
     public DbSet<Address> Addresses { get; set; } = default!;

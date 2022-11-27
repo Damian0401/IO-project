@@ -1,12 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 
-namespace Application.Core
+namespace Application.Core;
+
+public class AutoMapperProfile : Profile
 {
-    public class AutoMapperProfile
+    public AutoMapperProfile()
+    {
+        MapsForVehicle();
+        MapsForDepartment();
+        MapsForRent();
+        MapsForUser();
+    }
+    
+    private void MapsForVehicle()
     {
         
+    }
+
+    private void MapsForUser()
+    {
+
+    }
+
+    private void MapsForDepartment()
+    {
+
+    }
+
+    private void MapsForRent()
+    {
+
     }
 }

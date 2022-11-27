@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
+using AutoMapper;
 
 namespace Application.Services
 {
     public class VehicleService : IVehicleService
     {
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly IMapper _mapper;
 
-        public VehicleService(IVehicleRepository vehicleRepository)
+        public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _vehicleRepository = vehicleRepository;
         }
 

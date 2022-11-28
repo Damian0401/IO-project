@@ -12,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 export const history = createBrowserHistory({ window });
 
+document.title = 'CarrotRent';
+
 root.render(
   <ChakraProvider theme={theme}>
     <React.StrictMode>

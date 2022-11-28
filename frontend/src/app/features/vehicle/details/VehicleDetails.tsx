@@ -26,8 +26,8 @@ export default function VehicleDetails() {
     }
 
     const imageStyles: CSSProperties = {
-        height: '16rem',
-        width: '16rem',
+        maxHeight: '12rem',
+        maxWidth: '12rem',
         borderRadius: '0.5rem'
     }
 

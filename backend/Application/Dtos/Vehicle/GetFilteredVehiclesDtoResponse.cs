@@ -1,6 +1,6 @@
 namespace Application.Dtos.Vehicle;
 
-public class UpdateVehicleDtoRequest
+public class GetFilteredVehiclesDtoResponse
 {
     
 }

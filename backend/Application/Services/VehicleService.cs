@@ -19,7 +19,7 @@ namespace Application.Services
             _vehicleRepository = vehicleRepository;
         }
 
-        public GetVehiclesDtoResponse GetFiltered(GetVehiclesDtoRequest dto)
+        public GetFilteredVehiclesDtoResponse GetFiltered(GetFilteredVehiclesDtoRequest dto)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +40,11 @@ namespace Application.Services
         }
 
         public Guid Create(CreateVehicleDtoRequest dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GetVehicleFilterDataDtoResponse GetFilterData()
         {
             throw new NotImplementedException();
         }

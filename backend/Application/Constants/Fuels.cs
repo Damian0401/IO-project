@@ -10,5 +10,6 @@ namespace Application.Constants
         public const string Petrol = "Petrol";
         public const string Diesel = "Diesel";
         public const string Gas = "Gas";
+        public const string Hybrid = "Hybrid";
     }
 }

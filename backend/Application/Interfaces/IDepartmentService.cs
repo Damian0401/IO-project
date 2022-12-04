@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface IDepartmentService
     {
-        GetAllDepartmentsDtoResponse GetAll();
-        GetDepartmentByIdDtoResponse GetById();
+        GetAllDepartmentsDtoResponse GetAllDepartments();
+        GetDepartmentByIdDtoResponse? GetDepartmentById(Guid id);
     }
 }

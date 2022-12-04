@@ -4,12 +4,12 @@ namespace Application.Interfaces
 {
     public interface IRentService
     {
-        Guid Create(CreateRentDtoRequest dto);
-        bool Issue(Guid id);
-        bool Receive(Guid id);
-        GetRentByIdDtoResponse? GetById(Guid id);
-        GetActiveRentsDtoResponse GetActive();
-        GetArchivedRentsDtoResponse GetArchived();
-        bool Cancel(Guid id);
+        Guid CreateRent(CreateRentDtoRequest dto);
+        bool IssueRent(Guid id);
+        bool ReceiveRent(Guid id);
+        GetRentByIdDtoResponse? GetRentById(Guid id);
+        GetActiveRentsDtoResponse GetActiveRents();
+        GetArchivedRentsDtoResponse GetArchivedRents();
+        bool CancelRent(Guid id);
     }
 }

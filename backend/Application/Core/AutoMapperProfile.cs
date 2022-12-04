@@ -1,4 +1,7 @@
+using Application.Dtos.Department;
+using Application.Dtos.Vehicle;
 using AutoMapper;
+using Domain.Models;
 
 namespace Application.Core;
 
@@ -10,11 +13,38 @@ public class AutoMapperProfile : Profile
         MapsForDepartment();
         MapsForRent();
         MapsForUser();
+        MapsForModels();
+        MapsForBrand();
+        MapsForFuel();
     }
     
     private void MapsForVehicle()
     {
-        
+        CreateMap<Vehicle, GetVehicleByIdDtoResponse>()
+            .ForMember(x => x.Price, s => 
+                s.MapFrom(p => p.Price.PricePerDay))
+            .ForMember(x => x.Department, s =>
+                s.MapFrom(d => d.Department.Name))
+            .ForMember(x => x.Status, s =>
+                s.MapFrom(vs => vs.VehicleStatus.Name))
+            .ForMember(x => x.Fuel, s =>
+                s.MapFrom(f => f.Fuel.Type))
+            .ForMember(x => x.Model, s =>
+                s.MapFrom(m => m.Model.Name))
+            .ForMember(x => x.Brand, s =>
+                s.MapFrom(b => b.Model.Brand.Name));
+        CreateMap<Vehicle, VehicleForGetFilteredVehiclesDtoResponse>()
+            .ForMember(x => x.Model, s =>
+                s.MapFrom(m => m.Model.Name))
+            .ForMember(x => x.Brand, s =>
+                s.MapFrom(b => b.Model.Brand.Name));
+        CreateMap<CreateVehicleDtoRequest, Vehicle>()
+            .ForMember(x => x.Price, s => s.Ignore());
+        CreateMap<Vehicle, VehicleForGetDepartmentByIdDtoResponse>()
+            .ForMember(x => x.Model, s =>
+                s.MapFrom(v => v.Model.Name))
+            .ForMember(x => x.Brand, s =>
+                s.MapFrom(v => v.Model.Brand.Name));
     }
 
     private void MapsForUser()
@@ -24,11 +54,44 @@ public class AutoMapperProfile : Profile
 
     private void MapsForDepartment()
     {
-
+        CreateMap<Department, DepartmentForGetVehicleFilterDataDtoResponse>();
+        CreateMap<Department, DepartmentForGetAllDepartmentsDtoResponse>()
+            .ForMember(x => x.Address, s => 
+                s.MapFrom(d => $"{d.Address.City}, {d.Address.Street}, " +
+                    $"{d.Address.HouseNumber}/{d.Address.ApartmentNumber}"))
+            .ForMember(x => x.XPosition, s =>
+                s.MapFrom(d => d.Localization.XPosition))
+            .ForMember(x => x.YPosition, s =>
+                s.MapFrom(d => d.Localization.YPosition));
+        CreateMap<Department, GetDepartmentByIdDtoResponse>()            
+            .ForMember(x => x.Address, s => 
+                s.MapFrom(d => $"{d.Address.City}, {d.Address.Street}, " +
+                    $"{d.Address.HouseNumber}/{d.Address.ApartmentNumber}"))
+            .ForMember(x => x.Manager, s =>
+                s.MapFrom(d => $"{d.Manager.UserData.FirstName} {d.Manager.UserData.FirstName}"))
+            .ForMember(x => x.Vehicles, s =>
+                s.MapFrom(d => d.Vehicles));
     }
 
     private void MapsForRent()
     {
 
+    }
+
+    public void MapsForFuel()
+    {
+        CreateMap<Fuel, FuelForGetVehicleFilterDataDtoResponse>();
+    }
+
+    public void MapsForBrand()
+    {
+        CreateMap<Brand, BrandForGetVehicleFilterDataDtoResponse>()
+            .ForMember(x => x.Models, s =>
+                s.MapFrom(m => m.Models));
+    }
+
+    public void MapsForModels()
+    {
+        CreateMap<Model, ModelForGetVehicleFilterDataDtoResponse>();
     }
 }

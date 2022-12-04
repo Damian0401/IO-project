@@ -4,11 +4,11 @@ namespace Application.Interfaces
 {
     public interface IVehicleService
     {
-        GetFilteredVehiclesDtoResponse GetFiltered(GetFilteredVehiclesDtoRequest dto);
-        GetVehicleByIdDtoResponse GetById(Guid id);
-        GetVehicleFilterDataDtoResponse GetFilterData();
-        bool Update(Guid id, UpdateVehicleDtoRequest dto); 
-        bool Delete(Guid id);
-        Guid Create(CreateVehicleDtoRequest dto);
+        GetFilteredVehiclesDtoResponse GetFilteredVehicles(GetFilteredVehiclesDtoRequest dto);
+        GetVehicleByIdDtoResponse? GetVehicleById(Guid id);
+        GetVehicleFilterDataDtoResponse GetVehicleFilterData();
+        bool UpdateVehicle(Guid id, UpdateVehicleDtoRequest dto);
+        bool DeleteVehicle(Guid id);
+        bool CreateVehicle(CreateVehicleDtoRequest dto);
     }
 }

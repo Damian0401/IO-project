@@ -14,37 +14,37 @@ namespace Application.Services
             _mapper = mapper;
             _rentRepository = rentRepository;
         }
-        public bool Cancel(Guid id)
+        public bool CancelRent(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Guid Create(CreateRentDtoRequest dto)
+        public Guid CreateRent(CreateRentDtoRequest dto)
         {
             throw new NotImplementedException();
         }
 
-        public GetArchivedRentsDtoResponse GetArchived()
+        public GetArchivedRentsDtoResponse GetArchivedRents()
         {
             throw new NotImplementedException();
         }
 
-        public GetRentByIdDtoResponse? GetById(Guid id)
+        public GetRentByIdDtoResponse? GetRentById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public GetActiveRentsDtoResponse GetActive()
+        public GetActiveRentsDtoResponse GetActiveRents()
         {
             throw new NotImplementedException();
         }
 
-        public bool Issue(Guid id)
+        public bool IssueRent(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Receive(Guid id)
+        public bool ReceiveRent(Guid id)
         {
             throw new NotImplementedException();
         }

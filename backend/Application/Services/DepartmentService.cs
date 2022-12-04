@@ -18,14 +18,29 @@ namespace Application.Services
             _mapper = mapper;
             _departmentRepository = departmentRepository;
         }
-        public GetAllDepartmentsDtoResponse GetAll()
+        public GetAllDepartmentsDtoResponse GetAllDepartments()
         {
-            throw new NotImplementedException();
+            var departments = _departmentRepository.GetAllDepartments();
+
+            var response = new GetAllDepartmentsDtoResponse
+            {
+                Departments = _mapper.Map<List<DepartmentForGetAllDepartmentsDtoResponse>>(departments)
+            };
+
+            return response;
         }
 
-        public GetDepartmentByIdDtoResponse GetById()
+        public GetDepartmentByIdDtoResponse? GetDepartmentById(Guid id)
         {
-            throw new NotImplementedException();
+            var department = _departmentRepository
+                .GetDepartmentById(id);
+
+            if (department is null)
+                return null;
+
+            var response = _mapper.Map<GetDepartmentByIdDtoResponse>(department);
+
+            return response;
         }
     }
 }

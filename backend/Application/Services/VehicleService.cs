@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
 using AutoMapper;
+using Domain.Models;
 
 namespace Application.Services
 {
@@ -15,38 +16,87 @@ namespace Application.Services
 
         public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper)
         {
-            _mapper = mapper;
             _vehicleRepository = vehicleRepository;
+            _mapper = mapper;
         }
 
-        public GetFilteredVehiclesDtoResponse GetFiltered(GetFilteredVehiclesDtoRequest dto)
+        public GetFilteredVehiclesDtoResponse GetFilteredVehicles(GetFilteredVehiclesDtoRequest dto)
+        {
+            var vehicles = _vehicleRepository
+                .GetFilteredVehicles(dto);
+
+            var response = new GetFilteredVehiclesDtoResponse
+            {
+                Vehicles = _mapper.Map<List<VehicleForGetFilteredVehiclesDtoResponse>>(vehicles)
+            };
+
+            return response;
+        }
+
+        public GetVehicleByIdDtoResponse? GetVehicleById(Guid id)
+        {
+            var vehicle = _vehicleRepository.GetVehicleById(id);
+
+            if (vehicle is null)
+                return null;
+
+            var response = _mapper.Map<GetVehicleByIdDtoResponse>(vehicle);
+
+            return response;
+        }
+
+        public bool UpdateVehicle(Guid id, UpdateVehicleDtoRequest dto)
         {
             throw new NotImplementedException();
         }
 
-        public GetVehicleByIdDtoResponse GetById(Guid id)
+        public bool DeleteVehicle(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Guid id, UpdateVehicleDtoRequest dto)
+        public bool CreateVehicle(CreateVehicleDtoRequest dto)
         {
-            throw new NotImplementedException();
+            var allDepartments = _vehicleRepository.GetAllDepartments();
+            var department = allDepartments
+                .FirstOrDefault(x => x.Id.Equals(dto.DepartmentId));
+            if (department is null)
+                return false;
+
+            var allFuels = _vehicleRepository.GetAllFuels();
+            var fuel = allFuels
+                .FirstOrDefault(x => x.Id.Equals(dto.FuelId));
+            if (fuel is null)
+                return false;
+
+            var allModels = _vehicleRepository.GetAllBrands(withModels: true)
+                .SelectMany(x => x.Models);
+            var model = allModels.FirstOrDefault(x => x.Id.Equals(dto.ModelId));
+            if (model is null)
+                return false;
+
+            var vehicleToCreate = _mapper.Map<Vehicle>(dto);
+            vehicleToCreate.PriceId = _vehicleRepository.GetPriceId(dto.Price);
+
+            bool isCreated = _vehicleRepository.CreateVehicle(vehicleToCreate);
+
+            return isCreated;
         }
 
-        public bool Delete(Guid id)
+        public GetVehicleFilterDataDtoResponse GetVehicleFilterData()
         {
-            throw new NotImplementedException();
-        }
+            var fuels = _vehicleRepository.GetAllFuels();
+            var brands = _vehicleRepository.GetAllBrands(withModels: true);
+            var departments = _vehicleRepository.GetAllDepartments();
 
-        public Guid Create(CreateVehicleDtoRequest dto)
-        {
-            throw new NotImplementedException();
-        }
+            var response = new GetVehicleFilterDataDtoResponse
+            {
+                Brands = _mapper.Map<List<BrandForGetVehicleFilterDataDtoResponse>>(brands),
+                Fuels = _mapper.Map<List<FuelForGetVehicleFilterDataDtoResponse>>(fuels),
+                Departments = _mapper.Map<List<DepartmentForGetVehicleFilterDataDtoResponse>>(departments),
+            };
 
-        public GetVehicleFilterDataDtoResponse GetFilterData()
-        {
-            throw new NotImplementedException();
+            return response;
         }
     }
 }

@@ -1,15 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace Application.Dtos.Vehicle;
 
-namespace Application.Dtos.Vehicle
+public class GetVehicleFilterDataDtoResponse
 {
-    public class GetVehicleFilterDataDtoResponse
-    {
-        public IEnumerable<string> Fuels { get; set; } = default!;
-        public IEnumerable<string> Brands { get; set; } = default!;
-        public double MinPricePerDay { get; set; }
-        public double MaxPricePerDay { get; set; }
-    }
+    public List<FuelForGetVehicleFilterDataDtoResponse> Fuels { get; set; } = default!;
+    public List<BrandForGetVehicleFilterDataDtoResponse> Brands { get; set; } = default!;
+    public List<DepartmentForGetVehicleFilterDataDtoResponse> Departments { get; set; } = default!;
+
+}
+
+public class FuelForGetVehicleFilterDataDtoResponse
+{
+    public Guid Id { get; set; }
+    public string Type { get; set; } = default!;
+}
+
+public class BrandForGetVehicleFilterDataDtoResponse
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = default!;
+    public List<ModelForGetVehicleFilterDataDtoResponse> Models { get; set; } = default!;
+}
+
+public class ModelForGetVehicleFilterDataDtoResponse
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = default!;
+}
+
+public class DepartmentForGetVehicleFilterDataDtoResponse
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = default!;
 }

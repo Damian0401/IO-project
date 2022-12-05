@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseSwagger();
+app.UseCors("CorsPolicy");
 
 app.MapGet("/", () => "Hello World!");
 

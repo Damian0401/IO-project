@@ -1,9 +1,8 @@
 import { Card } from "@chakra-ui/card";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Button, Center, Container, IconButton, useColorMode } from "@chakra-ui/react";
+import { Center, IconButton, useColorMode } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { history } from "../../../index";
+import { useNavigate } from "react-router-dom";
 
 
 const ContentCard = ({ children }: PropsWithChildren) => {

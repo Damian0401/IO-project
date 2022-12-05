@@ -1,4 +1,4 @@
-import { ArrowForwardIcon, AtSignIcon, CalendarIcon, ChevronRightIcon, EditIcon, HamburgerIcon, Search2Icon, ViewIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, AtSignIcon, CalendarIcon, EditIcon, HamburgerIcon, Search2Icon, ViewIcon } from "@chakra-ui/icons";
 import { Center, Flex, HStack, Icon, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text } from "@chakra-ui/react";
 import { Link, Outlet } from "react-router-dom";
 

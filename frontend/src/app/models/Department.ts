@@ -20,6 +20,6 @@ export interface DepartmentDetails {
     id: string;
     name: string;
     vehicles: Vehicle[],
-    manager: string;
+    manager: string | undefined;
     address: string;
 }

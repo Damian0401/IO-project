@@ -3,8 +3,9 @@
 export interface Vehicle {
     id: string;
     model: string;
+    brand: string;
+    yearOfProduction: number;
     imageUrl: string;
-    status: string;
 }
 
 export interface VehicleDetails {

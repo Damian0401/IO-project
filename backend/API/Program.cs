@@ -20,6 +20,14 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("CorsPolicy", opt =>
+        opt.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin());
+});
+
 var app = builder.Build();
 app.UseSwagger();
 
@@ -74,6 +82,7 @@ app.MapGet("/api/v1/department", (IDepartmentService service) =>
 
     return Results.Ok(response);
 });
+
 app.MapGet("/api/v1/department/{id:guid}", (Guid id, IDepartmentService service) =>
 {
     var response = service.GetDepartmentById(id);

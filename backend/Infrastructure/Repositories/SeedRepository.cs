@@ -109,10 +109,6 @@ public class SeedRepository : ISeedRepository
             },
             new VehicleStatus
             {
-                Name = VehicleStatuses.Reserved
-            },
-            new VehicleStatus
-            {
                 Name = VehicleStatuses.Rented
             },
             new VehicleStatus

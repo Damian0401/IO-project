@@ -12,7 +12,7 @@ namespace Application.Dtos.Account
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
         public int Pesel { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string PostCode { get; set; } = default!;
         public string City { get; set; } = default!;

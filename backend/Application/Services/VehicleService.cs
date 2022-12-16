@@ -69,7 +69,7 @@ namespace Application.Services
             if (fuel is null)
                 return false;
 
-            var allModels = _vehicleRepository.GetAllBrands(withModels: true)
+            var allModels = _vehicleRepository.GetAllBrands()
                 .SelectMany(x => x.Models);
             var model = allModels.FirstOrDefault(x => x.Id.Equals(dto.ModelId));
             if (model is null)
@@ -86,7 +86,7 @@ namespace Application.Services
         public GetVehicleFilterDataDtoResponse GetVehicleFilterData()
         {
             var fuels = _vehicleRepository.GetAllFuels();
-            var brands = _vehicleRepository.GetAllBrands(withModels: true);
+            var brands = _vehicleRepository.GetAllBrands();
             var departments = _vehicleRepository.GetAllDepartments();
 
             var response = new GetVehicleFilterDataDtoResponse

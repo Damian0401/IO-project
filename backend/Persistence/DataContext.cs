@@ -106,6 +106,73 @@ public class DataContext : DbContext
         builder.Entity<User>()
             .HasIndex(x => x.Login)
             .IsUnique();
+
+        builder.Entity<Brand>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
+        builder.Entity<Model>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
+        builder.Entity<Vehicle>()
+            .Property(x => x.ImageUrl)
+            .HasMaxLength(255);
+        builder.Entity<Vehicle>()
+            .Property(x => x.Description)
+            .HasMaxLength(255);
+        builder.Entity<Vehicle>()
+            .Property(x => x.Registration)
+            .HasMaxLength(255);
+        builder.Entity<Vehicle>()
+            .Property(x => x.Vin)
+            .HasMaxLength(255);
+        builder.Entity<Fuel>()
+            .Property(x => x.Type)
+            .HasMaxLength(255);
+        builder.Entity<VehicleStatus>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
+        builder.Entity<Address>()
+            .Property(x => x.PostCode)
+            .HasMaxLength(255);
+        builder.Entity<Address>()
+            .Property(x => x.City)
+            .HasMaxLength(255);
+        builder.Entity<Address>()
+            .Property(x => x.Street)
+            .HasMaxLength(255);
+        builder.Entity<Address>()
+            .Property(x => x.HouseNumber)
+            .HasMaxLength(255);
+        builder.Entity<Address>()
+            .Property(x => x.ApartmentNumber)
+            .HasMaxLength(255);
+        builder.Entity<UserData>()
+            .Property(x => x.FirstName)
+            .HasMaxLength(255);
+        builder.Entity<UserData>()
+            .Property(x => x.LastName)
+            .HasMaxLength(255);
+        builder.Entity<UserData>()
+            .Property(x => x.PhoneNumber)
+            .HasMaxLength(255);
+        builder.Entity<UserData>()
+            .Property(x => x.Email)
+            .HasMaxLength(255);
+        builder.Entity<Department>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
+        builder.Entity<User>()
+            .Property(x => x.Login)
+            .HasMaxLength(255);
+        builder.Entity<User>()
+            .Property(x => x.PasswordHash)
+            .HasMaxLength(255);
+        builder.Entity<RentStatus>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
+        builder.Entity<Role>()
+            .Property(x => x.Name)
+            .HasMaxLength(255);
     }
 
     public DbSet<Address> Addresses { get; set; } = default!;

@@ -10,7 +10,7 @@ namespace Application.Interfaces
     public interface IVehicleRepository
     {
         List<Fuel> GetAllFuels();
-        List<Brand> GetAllBrands(bool withModels = false);
+        List<Brand> GetAllBrands();
         List<Department> GetAllDepartments();
         Vehicle? GetVehicleById(Guid id);
         List<Vehicle> GetFilteredVehicles(GetFilteredVehiclesDtoRequest dto);

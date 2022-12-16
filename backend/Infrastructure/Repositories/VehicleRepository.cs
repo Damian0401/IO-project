@@ -35,13 +35,12 @@ public class VehicleRepository : IVehicleRepository
         return isCreated;
     }
 
-    public List<Brand> GetAllBrands(bool withModels = false)
+    public List<Brand> GetAllBrands()
     {
         var brands = _context.Brands
             .AsQueryable();
 
-        if (withModels)
-            brands = brands.Include(x => x.Models);
+        brands = brands.Include(x => x.Models);
 
         return brands.ToList();
     }

@@ -6,7 +6,7 @@ public class UserData
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public int Pesel { get; set; }
-    public int PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = default!;
     public string Email { get; set; } = default!;
     public Guid AddressId { get; set; }
 

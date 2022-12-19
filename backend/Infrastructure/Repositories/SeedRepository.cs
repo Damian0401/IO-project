@@ -42,6 +42,100 @@ public class SeedRepository : ISeedRepository
         _context.SaveChanges();
     }
 
+    public void SeedModelsAndBrands()
+    {
+        if (_context.Brands.Count() > 0)
+            return;
+
+        var brands = new List<Brand>
+        {
+            new Brand
+            {
+                Name = "BMW",
+                Models = new List<Model>
+                {
+                    new Model
+                    {
+                        Name = "E23"
+                    },
+                    new Model
+                    {
+                        Name = "E39"
+                    },
+                    new Model
+                    {
+                        Name = "Z8"
+                    },
+                    new Model
+                    {
+                        Name = "X1"
+                    },
+                    new Model
+                    {
+                        Name = "M3"
+                    },
+                }
+            },
+            new Brand
+            {
+                Name = "Audi",
+                Models = new List<Model>
+                {
+                    new Model
+                    {
+                        Name = "Q5"
+                    },
+                    new Model
+                    {
+                        Name = "A3"
+                    },
+                    new Model
+                    {
+                        Name = "A6"
+                    },
+                    new Model
+                    {
+                        Name = "R8"
+                    },
+                    new Model
+                    {
+                        Name = "RS6"
+                    },
+                }
+            },
+            new Brand
+            {
+                Name = "Skoda",
+                Models = new List<Model>
+                {
+                    new Model
+                    {
+                        Name = "Felicia"
+                    },
+                    new Model
+                    {
+                        Name = "Octavia"
+                    },
+                    new Model
+                    {
+                        Name = "Citigo"
+                    },
+                    new Model
+                    {
+                        Name = "Yeti"
+                    },
+                    new Model
+                    {
+                        Name = "Fabia"
+                    },
+                }
+            }
+        };
+
+        _context.Brands.AddRange(brands);
+        _context.SaveChanges();
+    }
+
     public void SeedRentStatuses()
     {
         if (_context.RentStatuses.Count() > 0)

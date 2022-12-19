@@ -11,5 +11,6 @@ namespace Application.Interfaces
         void SeedFuels();
         void SeedRoles();
         void SeedRentStatuses();
+        void SeedModelsAndBrands();
     }
 }

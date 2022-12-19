@@ -1,17 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 using Application.Interfaces;
 using Domain.Models;
+using Microsoft.AspNetCore.Http;
+using Persistence;
 
 namespace Infrastructure.Security
 {
     public class UserAccessor : IUserAccessor
     {
+        private readonly DataContext _context;
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public UserAccessor(DataContext context, IHttpContextAccessor contextAccessor)
+        {
+            _contextAccessor = contextAccessor;
+            _context = context;
+            
+        }
+
         public User? GetCurrentlyLoggedUser()
         {
-            throw new NotImplementedException();
+            var userId = _contextAccessor
+                .HttpContext?
+                .User
+                .FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId is null)
+                return null;
+
+            var user = _context.Users.Find(userId);
+
+            return user;
         }
     }
 }

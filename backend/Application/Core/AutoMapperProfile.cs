@@ -1,3 +1,4 @@
+using Application.Dtos.Account;
 using Application.Dtos.Department;
 using Application.Dtos.Vehicle;
 using AutoMapper;
@@ -9,6 +10,8 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
+        MapsForAddress();
+        MapsForUser();
         MapsForVehicle();
         MapsForDepartment();
         MapsForRent();
@@ -47,7 +50,8 @@ public class AutoMapperProfile : Profile
 
     private void MapsForUser()
     {
-
+        CreateMap<RegisterDtoRequest, User>();
+        CreateMap<RegisterDtoRequest, UserData>();
     }
 
     private void MapsForDepartment()
@@ -76,19 +80,24 @@ public class AutoMapperProfile : Profile
 
     }
 
-    public void MapsForFuel()
+    private void MapsForAddress()
+    {
+        CreateMap<RegisterDtoRequest, Address>();
+    }
+
+    private void MapsForFuel()
     {
         CreateMap<Fuel, FuelForGetVehicleFilterDataDtoResponse>();
     }
 
-    public void MapsForBrand()
+    private void MapsForBrand()
     {
         CreateMap<Brand, BrandForGetVehicleFilterDataDtoResponse>()
             .ForMember(x => x.Models, s =>
                 s.MapFrom(m => m.Models));
     }
 
-    public void MapsForModels()
+    private void MapsForModels()
     {
         CreateMap<Model, ModelForGetVehicleFilterDataDtoResponse>();
     }

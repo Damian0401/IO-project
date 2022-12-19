@@ -1,5 +1,6 @@
 using API.Extensions;
 using Application.Core;
+using Application.Dtos.Account;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
 using Application.Services;
@@ -40,6 +41,7 @@ app.MapPost("/seed", (ISeedRepository seedRepository) =>
     seedRepository.SeedFuels();
     seedRepository.SeedVehicleStatuses();
     seedRepository.SeedRentStatuses();
+    seedRepository.SeedModelsAndBrands();
 
     return Results.Ok();
 });
@@ -90,6 +92,26 @@ app.MapGet("/api/v1/department/{id:guid}", (Guid id, IDepartmentService service)
 
     if (response is null)
         return Results.NotFound();
+
+    return Results.Ok(response);
+});
+
+app.MapPost("/api/v1/account/login", (LoginDtoRequest dto, IAccountService service) =>
+{
+    var response = service.Login(dto);
+
+    if (response is null)
+        return Results.BadRequest();
+
+    return Results.Ok(response);
+});
+
+app.MapPost("/api/v1/account/register", (RegisterDtoRequest dto, IAccountService service) =>
+{
+    var response = service.Register(dto);
+
+    if (response is null)
+        return Results.BadRequest();
 
     return Results.Ok(response);
 });

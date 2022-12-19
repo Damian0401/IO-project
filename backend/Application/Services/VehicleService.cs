@@ -57,22 +57,9 @@ namespace Application.Services
 
         public bool CreateVehicle(CreateVehicleDtoRequest dto)
         {
-            var allDepartments = _vehicleRepository.GetAllDepartments();
-            var department = allDepartments
-                .FirstOrDefault(x => x.Id.Equals(dto.DepartmentId));
-            if (department is null)
-                return false;
+            bool isVehicleValid = ValidateVehicle(dto);
 
-            var allFuels = _vehicleRepository.GetAllFuels();
-            var fuel = allFuels
-                .FirstOrDefault(x => x.Id.Equals(dto.FuelId));
-            if (fuel is null)
-                return false;
-
-            var allModels = _vehicleRepository.GetAllBrands()
-                .SelectMany(x => x.Models);
-            var model = allModels.FirstOrDefault(x => x.Id.Equals(dto.ModelId));
-            if (model is null)
+            if (!isVehicleValid)
                 return false;
 
             var vehicleToCreate = _mapper.Map<Vehicle>(dto);
@@ -97,6 +84,35 @@ namespace Application.Services
             };
 
             return response;
+        }
+
+        private bool ValidateVehicle(CreateVehicleDtoRequest dto)
+        {
+            if (!_vehicleRepository.IsVinAvailable(dto.Vin))
+                return false;
+
+            if (!_vehicleRepository.IsRegistrationAvailable(dto.Registration))
+                return false;
+
+            var allDepartments = _vehicleRepository.GetAllDepartments();
+            var department = allDepartments
+                .FirstOrDefault(x => x.Id.Equals(dto.DepartmentId));
+            if (department is null)
+                return false;
+
+            var allFuels = _vehicleRepository.GetAllFuels();
+            var fuel = allFuels
+                .FirstOrDefault(x => x.Id.Equals(dto.FuelId));
+            if (fuel is null)
+                return false;
+
+            var allModels = _vehicleRepository.GetAllBrands()
+                .SelectMany(x => x.Models);
+            var model = allModels.FirstOrDefault(x => x.Id.Equals(dto.ModelId));
+            if (model is null)
+                return false;
+
+            return true;
         }
     }
 }

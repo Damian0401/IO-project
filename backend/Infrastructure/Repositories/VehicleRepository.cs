@@ -131,4 +131,18 @@ public class VehicleRepository : IVehicleRepository
 
         return vehicle;
     }
+
+    public bool IsRegistrationAvailable(string registration)
+    {
+        return !_context
+            .Vehicles
+            .Any(x => x.Registration.Equals(registration));
+    }
+
+    public bool IsVinAvailable(string vin)
+    {
+        return !_context
+            .Vehicles
+            .Any(x => x.Vin.Equals(vin));
+    }
 }

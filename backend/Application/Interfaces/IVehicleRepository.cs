@@ -12,6 +12,9 @@ namespace Application.Interfaces
         List<Fuel> GetAllFuels();
         List<Brand> GetAllBrands();
         List<Department> GetAllDepartments();
+        Fuel? GetFuelById(Guid id);
+        Brand? GetModelById(Guid id);
+        Department? GetDepartmentById(Guid id);
         bool IsVinAvailable(string vin);
         bool IsRegistrationAvailable(string registration);
         Vehicle? GetVehicleById(Guid id);

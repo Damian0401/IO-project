@@ -61,6 +61,13 @@ public class VehicleRepository : IVehicleRepository
         return fuels;
     }
 
+    public Department? GetDepartmentById(Guid id)
+    {
+        return _context
+            .Departments
+            .Find(id);
+    }
+
     public List<Vehicle> GetFilteredVehicles(GetFilteredVehiclesDtoRequest dto)
     {
         var vehicles = _context.Vehicles
@@ -98,6 +105,20 @@ public class VehicleRepository : IVehicleRepository
                 x.Price.PricePerDay <= dto.MaxPrice);
 
         return vehicles.ToList();
+    }
+
+    public Fuel? GetFuelById(Guid id)
+    {
+        return _context
+            .Fuels
+            .Find(id);
+    }
+
+    public Brand? GetModelById(Guid id)
+    {
+        return _context
+            .Brands
+            .Find(id);
     }
 
     public Guid GetPriceId(double pricePerDay)

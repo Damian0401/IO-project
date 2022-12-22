@@ -1,5 +1,5 @@
 import { CardBody, CardHeader } from "@chakra-ui/card";
-import { Button, ButtonGroup, Flex, Heading, Spacer, Link as ChakraLink, Checkbox } from "@chakra-ui/react";
+import { Button, ButtonGroup, Flex, Heading, Spacer, Link as ChakraLink, Checkbox, Tooltip } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 import MyInput from "../../app/common/form/MyInput";
@@ -34,7 +34,7 @@ export default function RegisterForm() {
                         Register
                     </Heading>
                 </CardHeader>
-                <CardBody>
+                <CardBody overflow='auto' p='2'>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={(values => alert(values))}
@@ -125,13 +125,15 @@ export default function RegisterForm() {
                                     type="city"
                                     isRequired={true}
                                 />
-                                <Checkbox
-                                    p='2'
-                                    pl='1'
-                                    onChange={(e) => setIsPrivacyAccepted(e.target.checked)}
-                                >
-                                    Accept privacy policy
-                                </Checkbox>
+                                <Tooltip label="We can sell your data" aria-label='A tooltip'>
+                                    <Checkbox
+                                        p='2'
+                                        pl='1'
+                                        onChange={(e) => setIsPrivacyAccepted(e.target.checked)}
+                                    >
+                                        Accept privacy policy
+                                    </Checkbox>
+                                </Tooltip>
                                 <Flex pt='2'>
                                     <ButtonGroup colorScheme='teal'>
                                         <Button type='submit' disabled={!isPrivacyAccepted}>

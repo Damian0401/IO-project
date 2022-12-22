@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { BASE_API_URL } from "../common/utils/constants";
 import { Department as DepartmentDto, DepartmentDetails, DepartmentMarker } from "../models/Department";
-import { Vehicle as VehicleDto, VehicleDetails } from "../models/Vehicle";
+import { Vehicle as VehicleDto, VehicleDetails, VehicleFilters } from "../models/Vehicle";
 
 
 axios.defaults.baseURL = BASE_API_URL;
@@ -22,8 +22,9 @@ const Department = {
 };
 
 const Vehicle = {
-    getAll: () => requests.get<{ vehicles: VehicleDto[] }>('/vehicle').then(x => x.vehicles),
+    getAll: (filters?: string) => requests.get<{ vehicles: VehicleDto[] }>(`/vehicle?${filters}`).then(x => x.vehicles),
     getById: (id: string) => requests.get<VehicleDetails>(`/vehicle/${id}`),
+    getFilters: () => requests.get<VehicleFilters>('/vehicle/filters')
 };
 
 const agent = {

@@ -15,6 +15,7 @@ export default function RentListItem({ rent }: Props) {
                 _hover={{ bgColor: 'green.400' }}
                 p='3' borderRadius='0.5rem'
                 position='relative'
+                boxSizing='border-box'
             >
                 <Text as='b'>
                     {rent.vehicle + ' ' + format(rent.startDate, 'dd.MM.yyyy, HH:mm')}

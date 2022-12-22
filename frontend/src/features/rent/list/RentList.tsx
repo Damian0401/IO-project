@@ -12,7 +12,7 @@ export default function RentList({ rents }: Props) {
 
     return (
         <>
-            <Flex direction='column' maxHeight='80vh'>
+            <Flex direction='column' maxHeight='78vh'>
                 <Stack divider={<StackDivider />} spacing='4' overflow='auto'>
                     {rents.map(rent => (
                         <RentListItem rent={rent} key={rent.id} />

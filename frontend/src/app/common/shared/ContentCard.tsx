@@ -1,6 +1,6 @@
 import { Card } from "@chakra-ui/card";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Center, IconButton, useColorMode } from "@chakra-ui/react";
+import { Center, IconButton, useColorMode, useMediaQuery } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,11 +8,15 @@ import { useNavigate } from "react-router-dom";
 const ContentCard = ({ children }: PropsWithChildren) => {
     const { colorMode } = useColorMode();
     const navigation = useNavigate();
+    const [isSmaller] = useMediaQuery('(max-width: 768px)');
 
     return (
         <Center>
             <Card
-                width='35vw'
+
+                variant='main'
+                width= {isSmaller ? "100vw" : "35vw"}
+                maxHeight='89vh'
                 position='relative'
                 p='5' m='3'
                 borderRadius='1rem'

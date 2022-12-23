@@ -5,6 +5,7 @@ import theme from './app/common/utils/theme';
 import App from './app/layout/App';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { UserProvider } from './app/common/providers/UserProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,11 +16,13 @@ export const history = createBrowserHistory({ window });
 document.title = 'CarrotRent';
 
 root.render(
-  <ChakraProvider theme={theme}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <UserProvider>
+    <ChakraProvider theme={theme}>
       <HistoryRouter history={history}>
         <App />
       </HistoryRouter>
-    </React.StrictMode>
-  </ChakraProvider>
+    </ChakraProvider>
+    </UserProvider>
+  </React.StrictMode>
 );

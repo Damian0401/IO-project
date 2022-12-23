@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { BASE_API_URL } from "../common/utils/constants";
 import { Department as DepartmentDto, DepartmentDetails, DepartmentMarker } from "../models/Department";
+import { User, UserLoginValues } from "../models/User";
 import { Vehicle as VehicleDto, VehicleDetails, VehicleFilters } from "../models/Vehicle";
 
 
@@ -27,9 +28,14 @@ const Vehicle = {
     getFilters: () => requests.get<VehicleFilters>('/vehicle/filters')
 };
 
+const Account = {
+    login: (loginValues: UserLoginValues) => requests.post<User>('account/login', loginValues),
+}
+
 const agent = {
     Department,
-    Vehicle
+    Vehicle,
+    Account,
 };
 
 export default agent;

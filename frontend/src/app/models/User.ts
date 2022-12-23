@@ -18,3 +18,8 @@ export interface UserLoginValues {
     login: string;
     password: string;
 }
+
+export interface User {
+    login: string;
+    token: string;
+}

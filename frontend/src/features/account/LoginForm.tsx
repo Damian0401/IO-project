@@ -1,11 +1,15 @@
 import { CardBody, CardHeader } from "@chakra-ui/card";
 import { Button, ButtonGroup, Flex, Heading, Spacer, Link as ChakraLink } from "@chakra-ui/react";
 import { Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyInput from "../../app/common/form/MyInput";
 import ContentCard from "../../app/common/shared/ContentCard";
 import * as Yup from 'yup';
 import { UserLoginValues } from "../../app/models/User";
+import { useContext } from "react";
+import { UserContext } from "../../app/common/providers/UserProvider";
+import { UserAction, UserActionType } from "../../app/common/reducers/UserReducer";
+import agent from "../../app/api/agent";
 
 
 export default function LoginForm() {
@@ -13,6 +17,21 @@ export default function LoginForm() {
     const initialValues: UserLoginValues = {
         login: "",
         password: "",
+    }
+
+    const { dispatch } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
+    const handleLogin = (loginValues: UserLoginValues) => {
+        agent.Account.login(loginValues).then(user => {
+            const action: UserAction = {
+                type: UserActionType.SET_USER,
+                payload: user
+            };
+            dispatch(action);
+            navigate('/');
+        }).catch(e => console.log(e));
     }
 
     return (
@@ -26,7 +45,7 @@ export default function LoginForm() {
                 <CardBody>
                     <Formik
                         initialValues={initialValues}
-                        onSubmit={(values => alert(values))}
+                        onSubmit={handleLogin}
                         validationSchema={Yup.object({
                             login: Yup.string().required(),
                             password: Yup.string().required()

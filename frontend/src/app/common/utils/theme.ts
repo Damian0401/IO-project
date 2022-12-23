@@ -21,10 +21,17 @@ const theme = extendTheme({
     components: {
         Button: {
             variants: {
-                'navbar-menu': {
+                'navbar-button': {
                     _hover: {
                         bgColor: 'whiteAlpha.300'
                     }
+                }
+            }
+        },
+        Text: {
+            variants: {
+                'navbar-text': {
+                    color: 'whiteAlpha.800'
                 }
             }
         },

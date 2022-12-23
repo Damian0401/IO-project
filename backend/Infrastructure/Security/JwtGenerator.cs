@@ -21,7 +21,7 @@ namespace Infrastructure.Security
             _configuration = configuration;
             
         }
-        public string CreateToken(User user, DateTime expiresDate)
+        public string CreateToken(User user, DateTime expireDate)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
@@ -35,7 +35,7 @@ namespace Infrastructure.Security
             var tokenDescriptor= new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = expiresDate,
+                Expires = expireDate,
                 SigningCredentials = creds
             };
 

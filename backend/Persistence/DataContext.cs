@@ -14,9 +14,9 @@ public class DataContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<UserData>()
-            .HasOne(x => x.User)
+            .HasMany(x => x.Users)
             .WithOne(x => x.UserData)
-            .HasForeignKey<User>(x => x.UserDataId);
+            .HasForeignKey(x => x.UserDataId);
         builder.Entity<Address>()
             .HasOne(x => x.UserData)
             .WithOne(x => x.Address)

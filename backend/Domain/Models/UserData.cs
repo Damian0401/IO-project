@@ -10,6 +10,6 @@ public class UserData
     public string Email { get; set; } = default!;
     public Guid AddressId { get; set; }
 
-    public User User { get; set; } = default!;
+    public List<User> Users { get; set; } = default!;
     public Address Address { get; set; } = default!;
 }

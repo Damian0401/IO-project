@@ -42,6 +42,7 @@ app.MapPost("/seed", (ISeedRepository seedRepository) =>
     seedRepository.SeedVehicleStatuses();
     seedRepository.SeedRentStatuses();
     seedRepository.SeedModelsAndBrands();
+    seedRepository.SeedDepartments();
 
     return Results.Ok();
 });

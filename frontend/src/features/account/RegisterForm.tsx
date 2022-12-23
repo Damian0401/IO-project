@@ -1,12 +1,15 @@
 import { CardBody, CardHeader } from "@chakra-ui/card";
 import { Button, ButtonGroup, Flex, Heading, Spacer, Link as ChakraLink, Checkbox, Tooltip } from "@chakra-ui/react";
 import { Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyInput from "../../app/common/form/MyInput";
 import ContentCard from "../../app/common/shared/ContentCard";
 import * as Yup from 'yup';
 import { UserRegisterValues } from "../../app/models/User";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../app/common/providers/UserProvider";
+import agent from "../../app/api/agent";
+import { UserAction, UserActionType } from "../../app/common/reducers/UserReducer";
 
 
 export default function RegisterForm() {
@@ -16,15 +19,33 @@ export default function RegisterForm() {
     const initialValues: UserRegisterValues = {
         email: "",
         login: "",
+        firstName: "", 
+        lastName: "",
         password: "",
         apartmentNumber: "",
         city: "",
         houseNumber: "",
-        pesel: 0,
-        phoneNumber: 0,
+        pesel: "",
+        phoneNumber: "",
         postCode: "",
         street: "",
     }
+
+    const { dispatch } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
+    const handleRegster = (registerValues: UserRegisterValues) => {
+        agent.Account.register(registerValues).then(user => {
+            const action: UserAction = {
+                type: UserActionType.SET_USER,
+                payload: user
+            };
+            dispatch(action);
+            navigate('/');
+        }).catch(e => console.log(e));
+    }
+
 
     return (
         <>
@@ -37,7 +58,7 @@ export default function RegisterForm() {
                 <CardBody overflow='auto' p='2'>
                     <Formik
                         initialValues={initialValues}
-                        onSubmit={(values => alert(values))}
+                        onSubmit={handleRegster}
                         validationSchema={Yup.object({
                             login: Yup.string().required(),
                             password: Yup.string().required(),
@@ -48,7 +69,9 @@ export default function RegisterForm() {
                             postCode: Yup.string().required(),
                             street: Yup.string().required(),
                             pesel: Yup.number().required(),
-                            phoneNumber: Yup.number().required(),
+                            phoneNumber: Yup.string().required(),
+                            firstName: Yup.string().required(),
+                            lastName: Yup.string().required(),
                         })}
                     >
                         {({ handleSubmit, errors, touched }) => (
@@ -59,6 +82,22 @@ export default function RegisterForm() {
                                     errors={errors.email}
                                     touched={touched.email}
                                     type="email"
+                                    isRequired={true}
+                                />
+                                <MyInput
+                                    label="FirstName"
+                                    name="firstName"
+                                    errors={errors.firstName}
+                                    touched={touched.firstName}
+                                    type="text"
+                                    isRequired={true}
+                                />
+                                <MyInput
+                                    label="LastName"
+                                    name="lastName"
+                                    errors={errors.lastName}
+                                    touched={touched.lastName}
+                                    type="text"
                                     isRequired={true}
                                 />
                                 <MyInput
@@ -82,15 +121,15 @@ export default function RegisterForm() {
                                     name="pesel"
                                     errors={errors.pesel}
                                     touched={touched.pesel}
-                                    type="number"
+                                    type="text"
                                     isRequired={true}
                                 />
                                 <MyInput
                                     label="PhoneNumber"
                                     name="phoneNumber"
-                                    errors={errors.password}
-                                    touched={touched.password}
-                                    type="number"
+                                    errors={errors.phoneNumber}
+                                    touched={touched.phoneNumber}
+                                    type="text"
                                     isRequired={true}
                                 />
                                 <MyInput
@@ -104,31 +143,38 @@ export default function RegisterForm() {
                                 <MyInput
                                     label="HouseNumber"
                                     name="houseNumber"
-                                    errors={errors.apartmentNumber}
-                                    touched={touched.apartmentNumber}
+                                    errors={errors.houseNumber}
+                                    touched={touched.houseNumber}
                                     type="text"
                                     isRequired={true}
                                 />
                                 <MyInput
                                     label="PostCode"
                                     name="postCode"
-                                    errors={errors.password}
-                                    touched={touched.password}
+                                    errors={errors.postCode}
+                                    touched={touched.postCode}
                                     type="text"
                                     isRequired={true}
                                 />
                                 <MyInput
                                     label="City"
                                     name="city"
-                                    errors={errors.password}
-                                    touched={touched.password}
-                                    type="city"
+                                    errors={errors.city}
+                                    touched={touched.city}
+                                    type="text"
+                                    isRequired={true}
+                                />
+                                <MyInput
+                                    label="Street"
+                                    name="street"
+                                    errors={errors.street}
+                                    touched={touched.street}
+                                    type="text"
                                     isRequired={true}
                                 />
                                 <Tooltip label="We can sell your data" aria-label='A tooltip'>
                                     <Checkbox
-                                        p='2'
-                                        pl='1'
+                                        p='2' pl='1'
                                         onChange={(e) => setIsPrivacyAccepted(e.target.checked)}
                                     >
                                         Accept privacy policy

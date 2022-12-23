@@ -4,8 +4,10 @@ export interface UserRegisterValues {
     login: string;
     password: string;
     email: string;
-    pesel: number;
-    phoneNumber: number;
+    pesel: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
     postCode: string;
     city: string;
     street: string;

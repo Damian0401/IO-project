@@ -56,7 +56,7 @@ public class AccountService : IAccountService
         var user = _mapper.Map<User>(dto);
         user.UserData = userData;
         user.PasswordHash = GeneratePasswordHash(user, dto.Password);
-        user.RoleId = _accountRepository.GetRoleId(Roles.Client);
+        user.Role = _accountRepository.GetRoleByName(Roles.Client);
 
         bool isCreated = _accountRepository.CreateUser(user);
 

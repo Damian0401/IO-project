@@ -28,6 +28,7 @@ namespace Infrastructure.Security
             var claims = new List<Claim>
             {
                 new (ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new (ClaimTypes.Role, user.Role.Name),
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);

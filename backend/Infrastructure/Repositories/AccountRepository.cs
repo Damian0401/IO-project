@@ -23,7 +23,7 @@ public class AccountRepository : IAccountRepository
         return result > 0;
     }
 
-    public Guid GetRoleId(string roleName)
+    public Role GetRoleByName(string roleName)
     {
         var role = _context
             .Roles
@@ -31,7 +31,7 @@ public class AccountRepository : IAccountRepository
 
         if (role is not null)
         {
-            return role.Id;
+            return role;
         }
 
         role = new Role
@@ -41,7 +41,7 @@ public class AccountRepository : IAccountRepository
         _context.Roles.Add(role);
         _context.SaveChanges();
 
-        return role.Id;
+        return role;
     }
 
     public User? GetUserByLogin(string login)

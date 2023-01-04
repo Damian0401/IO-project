@@ -14,6 +14,6 @@ namespace Application.Interfaces
         bool IsLoginsAvailable(string login);
         bool CreateUser(User user);
         User? GetUserByLogin(string login);
-        Guid GetRoleId(string roleName);
+        Role GetRoleByName(string roleName);
     }
 }

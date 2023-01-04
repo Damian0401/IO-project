@@ -34,7 +34,8 @@ public class AccountService : IAccountService
         var response = new LoginDtoResponse
         {
             Login = dto.Login,
-            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3))
+            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3)),
+            Role = user.Role.Name,
         };
 
         return response;
@@ -55,7 +56,7 @@ public class AccountService : IAccountService
         var user = _mapper.Map<User>(dto);
         user.UserData = userData;
         user.PasswordHash = GeneratePasswordHash(user, dto.Password);
-        user.RoleId = _accountRepository.GetRoleId(Roles.Employee);
+        user.RoleId = _accountRepository.GetRoleId(Roles.Client);
 
         bool isCreated = _accountRepository.CreateUser(user);
 
@@ -65,7 +66,8 @@ public class AccountService : IAccountService
         var response = new RegisterDtoResponse
         {
             Login = user.Login,
-            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3))
+            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3)),
+            Role = user.Role.Name
         };
 
         return response;

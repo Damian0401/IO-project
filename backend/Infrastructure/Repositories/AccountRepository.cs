@@ -1,6 +1,7 @@
 using Application.Constants;
 using Application.Interfaces;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Infrastructure.Repositories;
@@ -47,6 +48,7 @@ public class AccountRepository : IAccountRepository
     {
         return _context
             .Users
+            .Include(x => x.Role)
             .FirstOrDefault(x => x.Login.Equals(login));
     }
 

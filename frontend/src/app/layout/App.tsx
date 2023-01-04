@@ -12,6 +12,8 @@ import RegisterForm from "../../features/account/RegisterForm";
 import VehicleDashboard from "../../features/vehicle/dashboard/VehicleDashboard";
 import RentDashboard from "../../features/rent/dashboard/RentDashboard";
 import RentDetails from "../../features/rent/details/RentDetails";
+import PrivateRoute from "../common/shared/PrivateRoute";
+import AnonymousRoute from "../common/shared/AnonymousRoute";
 
 function App() {
   return (
@@ -20,8 +22,8 @@ function App() {
       <Routes>
         <Route element={<Navbar />}>
           <Route index element={<HomePage />} />
-          <Route path='login' element={<LoginForm />} />
-          <Route path='register' element={<RegisterForm />} />
+          <Route path='login' element={<AnonymousRoute Component={LoginForm} />} />
+          <Route path='register' element={<AnonymousRoute Component={RegisterForm} />} />
           <Route path='map' element={<Map />} />
           <Route path='departments'>
             <Route index element={<DepartmentDashboard />} />

@@ -53,6 +53,17 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<RegisterDtoRequest, User>();
         CreateMap<RegisterDtoRequest, UserData>();
+        CreateMap<User, RegisterDtoResponse>()
+            .ForMember(x => x.Role, s =>
+                s.MapFrom(u => u.Role.Name));
+        CreateMap<User, LoginDtoResponse>()
+            .ForMember(x => x.Role, s =>
+                s.MapFrom(u => u.Role.Name))
+            .ForMember(x => x.DepartmentIds, s =>
+                s.MapFrom(u => u.DepartmentId == null 
+                    ? u.OwnedDepartments.Select(x => x.Id) 
+                    : u.OwnedDepartments.Select(x => x.Id)
+                        .Append(u.DepartmentId.Value)));
     }
 
     private void MapsForDepartment()

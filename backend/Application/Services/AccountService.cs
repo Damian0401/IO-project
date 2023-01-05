@@ -31,12 +31,8 @@ public class AccountService : IAccountService
         if (!isPasswordCorrect)
             return null;
 
-        var response = new LoginDtoResponse
-        {
-            Login = dto.Login,
-            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3)),
-            Role = user.Role.Name,
-        };
+        var response = _mapper.Map<LoginDtoResponse>(user);
+        response.Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3));
 
         return response;
     }
@@ -56,14 +52,17 @@ public class AccountService : IAccountService
         var user = _mapper.Map<User>(dto);
         user.UserData = userData;
         user.PasswordHash = GeneratePasswordHash(user, dto.Password);
-        user.Role = _accountRepository.GetRoleByName(Roles.Client);
+        user.Role = _accountRepository.GetRoleByName(Roles.Unverified);
 
         bool isCreated = _accountRepository.CreateUser(user);
 
         if (!isCreated)
             return null;
 
-        var response = new RegisterDtoResponse
+        var response = _mapper.Map<RegisterDtoResponse>(user);
+        response.Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3));
+        
+        new RegisterDtoResponse
         {
             Login = user.Login,
             Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3)),

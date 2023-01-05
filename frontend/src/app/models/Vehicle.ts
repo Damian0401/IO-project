@@ -19,6 +19,7 @@ export interface VehicleDetails {
     description: string;
     status: string;
     department: string;
+    departmentId: string;
     price: number;
 }
 

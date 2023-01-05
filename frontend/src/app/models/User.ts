@@ -25,4 +25,5 @@ export interface User {
     login: string;
     token: string;
     role: string;
+    departmentIds: string[];
 }

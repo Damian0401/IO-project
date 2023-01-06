@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 import { CSSProperties, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import agent from "../../../app/api/agent";
 import { UserContext } from "../../../app/common/providers/UserProvider";
 import ContentCard from "../../../app/common/shared/ContentCard";
@@ -12,10 +12,9 @@ import { VehicleDetails as Vehicle } from "../../../app/models/Vehicle";
 export default function VehicleDetails() {
 
     const { id } = useParams<{ id: string }>();
-
     const [vehicle, setVehicle] = useState<Vehicle>();
-
     const { state: user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const userCanDelete = user?.role === MANAGER && vehicle && user.departmentIds.includes(vehicle.departmentId);
     const userCanEdit = (user?.role === MANAGER || user?.role === EMPLOYEE) && vehicle && user.departmentIds.includes(vehicle.departmentId);
@@ -27,6 +26,12 @@ export default function VehicleDetails() {
 
     const imageStyles: CSSProperties = {
         borderRadius: '0.5rem',
+    }
+
+    const handleDelete = () => {
+        if (!vehicle) return;
+
+        agent.Vehicle.deleteById(vehicle?.id).then(() => navigate(-1));
     }
 
     if (!vehicle) return <LoadingSpinner />
@@ -78,7 +83,7 @@ export default function VehicleDetails() {
                     </GridItem>
                     <GridItem colSpan={5} position='relative'>
                         {user && <ButtonGroup position='absolute' bottom='0' right='0'>
-                            {userCanDelete && <Button colorScheme='red'>
+                            {userCanDelete && <Button colorScheme='red' onClick={handleDelete}>
                                 Delete
                             </Button>}
                             {userCanEdit && <Button colorScheme='blue'>

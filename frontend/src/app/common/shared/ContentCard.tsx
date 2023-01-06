@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const ContentCard = ({ children }: PropsWithChildren) => {
     const { colorMode } = useColorMode();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const [isSmaller] = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -27,7 +27,7 @@ const ContentCard = ({ children }: PropsWithChildren) => {
                     size='xs' position='absolute'
                     top='0' right='0'
                     icon={<ArrowBackIcon />}
-                    onClick={() => navigation(-1)}
+                    onClick={() => navigate(-1)}
                     borderRadius='0'
                     borderTopRightRadius='1rem'
                     borderBottomLeftRadius='0.5rem'

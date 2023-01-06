@@ -7,6 +7,14 @@ import { Vehicle as VehicleDto, VehicleDetails, VehicleFilters } from "../models
 
 axios.defaults.baseURL = BASE_API_URL;
 
+axios.interceptors.request.use(request => {
+    const userAsString = window.localStorage.getItem('user');
+    const user: User | undefined = !!userAsString ? JSON.parse(userAsString) : undefined;
+    if (user) request.headers!.Authorization = `Bearer ${user.token}`;
+    return request;
+});
+
+
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
@@ -25,7 +33,8 @@ const Department = {
 const Vehicle = {
     getAll: (filters?: string) => requests.get<{ vehicles: VehicleDto[] }>(`/vehicle?${filters}`).then(x => x.vehicles),
     getById: (id: string) => requests.get<VehicleDetails>(`/vehicle/${id}`),
-    getFilters: () => requests.get<VehicleFilters>('/vehicle/filters')
+    getFilters: () => requests.get<VehicleFilters>('/vehicle/filters'),
+    deleteById: (id: string) => requests.delete(`/vehicle/${id}`),
 };
 
 const Account = {

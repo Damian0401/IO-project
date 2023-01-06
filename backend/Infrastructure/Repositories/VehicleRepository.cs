@@ -35,6 +35,13 @@ public class VehicleRepository : IVehicleRepository
         return isCreated;
     }
 
+    public bool DeleteVehicle(Vehicle vehicle)
+    {
+        _context.Vehicles.Remove(vehicle);
+        var isDeleted = _context.SaveChanges() > 0;
+        return isDeleted;
+    }
+
     public List<Brand> GetAllBrands()
     {
         var brands = _context.Brands

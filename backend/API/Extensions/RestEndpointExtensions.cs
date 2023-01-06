@@ -63,6 +63,16 @@ public static class RestEndpointExtensions
             return Results.Ok(response);
         });
 
+        app.MapDelete("/api/v1/vehicle/{id}", [Authorize(Roles=Roles.Manager)] ([FromRoute] Guid id, IVehicleService service) =>
+        {
+            var isDeleted = service.DeleteVehicle(id);
+
+            if (!isDeleted)
+                return Results.BadRequest();
+
+            return Results.Ok();
+        });
+
         app.MapGet("/api/v1/department", (IDepartmentService service) =>
         {
             var response = service.GetAllDepartments();

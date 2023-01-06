@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Infrastructure.Security
@@ -28,7 +29,9 @@ namespace Infrastructure.Security
             if (userId is null)
                 return null;
 
-            var user = _context.Users.Find(userId);
+            var user = _context.Users
+                .Include(x => x.Role)
+                .FirstOrDefault(x => x.Id.Equals(Guid.Parse(userId)));
 
             return user;
         }

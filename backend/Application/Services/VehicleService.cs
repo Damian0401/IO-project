@@ -1,3 +1,4 @@
+using Application.Constants;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
 using AutoMapper;
@@ -9,9 +10,11 @@ public class VehicleService : IVehicleService
 {
     private readonly IVehicleRepository _vehicleRepository;
     private readonly IMapper _mapper;
+    private readonly IUserAccessor _userAccessor;
 
-    public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper)
+    public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper, IUserAccessor userAccessor)
     {
+        _userAccessor = userAccessor;
         _vehicleRepository = vehicleRepository;
         _mapper = mapper;
     }
@@ -48,7 +51,24 @@ public class VehicleService : IVehicleService
 
     public bool DeleteVehicle(Guid id)
     {
-        throw new NotImplementedException();
+        var user = _userAccessor.GetCurrentlyLoggedUser();
+
+        if (user is null || !user.Role.Name.Equals(Roles.Manager))
+            return false;
+
+        var vehicle = _vehicleRepository
+            .GetVehicleById(id);
+
+        if (vehicle is null)
+            return false;
+
+        if (!vehicle.Department.ManagerId.Equals(user.Id))
+            return false;
+
+        var isDeleted = _vehicleRepository
+            .DeleteVehicle(vehicle);
+
+        return isDeleted;
     }
 
     public bool CreateVehicle(CreateVehicleDtoRequest dto)

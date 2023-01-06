@@ -21,5 +21,6 @@ namespace Application.Interfaces
         List<Vehicle> GetFilteredVehicles(GetFilteredVehiclesDtoRequest dto);
         bool CreateVehicle(Vehicle dto);
         Guid GetPriceId(double pricePerDay);
+        bool DeleteVehicle(Vehicle vehicle);
     }
 }

@@ -23,19 +23,30 @@ export default function Navbar() {
 
     return (
         <>
-            <Flex p='3' bgColor='blackAlpha.800' fontFamily='fantasy' width='100%' zIndex='1' height='7vh'>
+            <Flex
+                p='3'
+                bgColor='blackAlpha.800'
+                width='100%'
+                zIndex='1'
+                height='7vh'
+            >
                 <HStack as={Link} to='/' >
                     <Icon as={CalendarIcon} w='8' h='8' color='whiteAlpha.800' />
-                    <Text fontSize='3xl' noOfLines={1} variant='navbar-text'>
+                    <Text
+                        fontSize='3xl'
+                        noOfLines={1}
+                        variant='navbar-text'
+                        fontFamily='fantasy'
+                    >
                         Carrot Rent
                     </Text>
                 </HStack>
                 <Spacer />
                 <Center height='100%'>
-                    {user && 
-                    <Text variant='navbar-text'>
-                        {user.login}
-                    </Text>}
+                    {user &&
+                        <Text variant='navbar-text' fontSize='large' fontFamily='monospace'>
+                            {user.login} <b>[{user.role}]</b>
+                        </Text>}
                     <Menu>
                         <MenuButton
                             as={IconButton}

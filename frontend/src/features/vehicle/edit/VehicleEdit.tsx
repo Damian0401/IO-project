@@ -30,13 +30,15 @@ export default function VehicleEdit() {
     }, [vehicle, user, navigate])
 
     const handleEdit = (vehicle: VehicleDetails) => {
+        if (!id) return;
+
         const editValues: VehicleEditValues = {
             description: vehicle.description,
             price: vehicle.price,
             seats: vehicle.seats,
             yearOfProduction: vehicle.yearOfProduction
         };
-        console.log(editValues);
+        agent.Vehicle.update(id, editValues).then(() => navigate(-1));
     }
 
     if (!vehicle) return <LoadingSpinner />

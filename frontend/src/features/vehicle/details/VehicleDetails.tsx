@@ -27,7 +27,7 @@ export default function VehicleDetails() {
     const handleDelete = () => {
         if (!vehicle) return;
 
-        agent.Vehicle.deleteById(vehicle?.id).then(() => navigate(-1));
+        agent.Vehicle.delete(vehicle?.id).then(() => navigate(-1));
     }
 
     if (!vehicle) return <LoadingSpinner />

@@ -74,7 +74,7 @@ export default function LoginForm() {
                                         <Button type='submit'>
                                             Login
                                         </Button>
-                                        <Button as={Link} to='/'>
+                                        <Button onClick={() => navigate(-1)}>
                                             Back
                                         </Button>
                                     </ButtonGroup>

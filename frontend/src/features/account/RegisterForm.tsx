@@ -185,7 +185,7 @@ export default function RegisterForm() {
                                         <Button type='submit' disabled={!isPrivacyAccepted}>
                                             Register
                                         </Button>
-                                        <Button as={Link} to='/'>
+                                        <Button onClick={() => navigate(-1)}>
                                             Back
                                         </Button>
                                     </ButtonGroup>

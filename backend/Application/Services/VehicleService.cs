@@ -46,7 +46,19 @@ public class VehicleService : IVehicleService
 
     public bool UpdateVehicle(Guid id, UpdateVehicleDtoRequest dto)
     {
-        throw new NotImplementedException();
+        var user = _userAccessor.GetCurrentlyLoggedUser();
+
+        if (user is null)
+            return false;
+
+        var department = _vehicleRepository.GetVehicleDepartment(id);
+
+        if (department is null || !department.ManagerId.Equals(user.Id))
+            return false;
+
+        var isUpdated = _vehicleRepository.UpdateVehicle(id, dto);
+
+        return isUpdated;
     }
 
     public bool DeleteVehicle(Guid id)
@@ -56,17 +68,17 @@ public class VehicleService : IVehicleService
         if (user is null || !user.Role.Name.Equals(Roles.Manager))
             return false;
 
-        var vehicle = _vehicleRepository
-            .GetVehicleById(id);
+        var department = _vehicleRepository
+            .GetVehicleDepartment(id);
 
-        if (vehicle is null)
+        if (department is null)
             return false;
 
-        if (!vehicle.Department.ManagerId.Equals(user.Id))
+        if (!department.ManagerId.Equals(user.Id))
             return false;
 
         var isDeleted = _vehicleRepository
-            .DeleteVehicle(vehicle);
+            .DeleteVehicle(id);
 
         return isDeleted;
     }

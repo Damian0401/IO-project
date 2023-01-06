@@ -35,9 +35,16 @@ public class VehicleRepository : IVehicleRepository
         return isCreated;
     }
 
-    public bool DeleteVehicle(Vehicle vehicle)
+    public bool DeleteVehicle(Guid id)
     {
-        _context.Vehicles.Remove(vehicle);
+        var vehicleToDelete = _context
+            .Vehicles
+            .Find(id);
+
+        if (vehicleToDelete is null)
+            return false;
+
+        _context.Vehicles.Remove(vehicleToDelete);
         var isDeleted = _context.SaveChanges() > 0;
         return isDeleted;
     }
@@ -160,6 +167,17 @@ public class VehicleRepository : IVehicleRepository
         return vehicle;
     }
 
+    public Department? GetVehicleDepartment(Guid vehicleId)
+    {
+        var department = _context
+            .Departments
+            .Include(x => x.Vehicles)
+            .FirstOrDefault(x => x.Vehicles
+                .Any(v => v.Id.Equals(vehicleId)));
+
+        return department;
+    }
+
     public bool IsRegistrationAvailable(string registration)
     {
         return !_context
@@ -172,5 +190,21 @@ public class VehicleRepository : IVehicleRepository
         return !_context
             .Vehicles
             .Any(x => x.Vin.Equals(vin));
+    }
+
+    public bool UpdateVehicle(Guid id, UpdateVehicleDtoRequest dto)
+    {
+        var vehicle = _context.Vehicles.Find(id);
+
+        if (vehicle is null)
+            return false;
+
+        vehicle.PriceId = GetPriceId(dto.Price);
+        vehicle.Description = dto.Description;
+        vehicle.Seats = dto.Seats;
+        vehicle.YearOfProduction = dto.YearOfProduction;
+
+        var isUpdated = _context.SaveChanges() > 0;
+        return isUpdated;
     }
 }

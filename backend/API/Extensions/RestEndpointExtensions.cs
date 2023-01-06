@@ -63,7 +63,21 @@ public static class RestEndpointExtensions
             return Results.Ok(response);
         });
 
-        app.MapDelete("/api/v1/vehicle/{id}", [Authorize(Roles=Roles.Manager)] ([FromRoute] Guid id, IVehicleService service) =>
+        app.MapPut("/api/v1/vehicle/{id}", 
+        [Authorize(Roles=Roles.Manager + "," + Roles.Employee)] 
+        ([FromRoute] Guid id, UpdateVehicleDtoRequest dto, IVehicleService vehicleService) =>
+        {
+            var isUpdated = vehicleService.UpdateVehicle(id, dto);
+
+            if (!isUpdated)
+                return Results.NotFound();
+
+            return Results.Ok();
+        });
+
+        app.MapDelete("/api/v1/vehicle/{id}", 
+        [Authorize(Roles=Roles.Manager)] 
+        ([FromRoute] Guid id, IVehicleService service) =>
         {
             var isDeleted = service.DeleteVehicle(id);
 

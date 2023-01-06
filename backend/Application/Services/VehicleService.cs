@@ -70,7 +70,7 @@ public class VehicleService : IVehicleService
     {
         var user = _userAccessor.GetCurrentlyLoggedUser();
 
-        if (user is null || !user.Role.Name.Equals(Roles.Manager))
+        if (user is null)
             return false;
 
         var department = _vehicleRepository
@@ -121,14 +121,19 @@ public class VehicleService : IVehicleService
 
     private bool ValidateVehicle(CreateVehicleDtoRequest dto)
     {
+        var user = _userAccessor.GetCurrentlyLoggedUser();
+
+        if (user is null)
+            return false;
+
+        var department = _vehicleRepository.GetDepartmentById(dto.DepartmentId);
+        if (department is null || !department.ManagerId.Equals(user.Id))
+            return false;
+
         if (!_vehicleRepository.IsVinAvailable(dto.Vin))
             return false;
 
         if (!_vehicleRepository.IsRegistrationAvailable(dto.Registration))
-            return false;
-
-        var department = _vehicleRepository.GetDepartmentById(dto.DepartmentId);
-        if (department is null)
             return false;
 
         var fuel = _vehicleRepository.GetFuelById(dto.FuelId);

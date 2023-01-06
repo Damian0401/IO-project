@@ -59,13 +59,15 @@ export default function LoginForm() {
                                     errors={errors.login}
                                     touched={touched.login}
                                     type="text"
-                                />
+                                    isRequired={true}
+                                    />
                                 <MyInput
                                     label="Password"
                                     name="password"
                                     errors={errors.password}
                                     touched={touched.password}
                                     type="password"
+                                    isRequired={true}
                                 />
                                 <Flex pt='2'>
                                     <ButtonGroup colorScheme='teal'>

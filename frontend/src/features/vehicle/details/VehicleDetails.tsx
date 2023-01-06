@@ -1,10 +1,10 @@
 import { Button, ButtonGroup, Grid, GridItem, Heading, Text } from "@chakra-ui/react";
 import { CSSProperties, useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import agent from "../../../app/api/agent";
 import { UserContext } from "../../../app/common/providers/UserProvider";
 import ContentCard from "../../../app/common/shared/ContentCard";
-import { CLIENT, EMPLOYEE, MANAGER } from "../../../app/common/utils/constants";
+import { userCanDelete, userCanEdit, userCanRent } from "../../../app/common/utils/helpers";
 import LoadingSpinner from "../../../app/layout/LoadingSpinner";
 import { VehicleDetails as Vehicle } from "../../../app/models/Vehicle";
 
@@ -15,10 +15,6 @@ export default function VehicleDetails() {
     const [vehicle, setVehicle] = useState<Vehicle>();
     const { state: user } = useContext(UserContext);
     const navigate = useNavigate();
-
-    const userCanDelete = user?.role === MANAGER && vehicle && user.departmentIds.includes(vehicle.departmentId);
-    const userCanEdit = (user?.role === MANAGER || user?.role === EMPLOYEE) && vehicle && user.departmentIds.includes(vehicle.departmentId);
-    const userCanRent = user?.role === CLIENT;
 
     useEffect(() => {
         agent.Vehicle.getById(id!).then(data => setVehicle(data));
@@ -83,13 +79,17 @@ export default function VehicleDetails() {
                     </GridItem>
                     <GridItem colSpan={5} position='relative'>
                         {user && <ButtonGroup position='absolute' bottom='0' right='0'>
-                            {userCanDelete && <Button colorScheme='red' onClick={handleDelete}>
+                            {userCanDelete(user, vehicle) && <Button colorScheme='red' onClick={handleDelete}>
                                 Delete
                             </Button>}
-                            {userCanEdit && <Button colorScheme='blue'>
+                            {userCanEdit(user, vehicle) && <Button
+                                colorScheme='blue'
+                                as={Link}
+                                to={`/vehicles/${vehicle.id}/edit`}
+                            >
                                 Edit
                             </Button>}
-                            {userCanRent && <Button colorScheme='teal'>
+                            {userCanRent(user) && <Button colorScheme='teal'>
                                 Rent
                             </Button>}
                         </ButtonGroup>}

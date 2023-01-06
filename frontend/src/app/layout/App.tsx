@@ -14,10 +14,12 @@ import RentDashboard from "../../features/rent/dashboard/RentDashboard";
 import RentDetails from "../../features/rent/details/RentDetails";
 import PrivateRoute from "../common/shared/PrivateRoute";
 import AnonymousRoute from "../common/shared/AnonymousRoute";
+import VehicleEdit from "../../features/vehicle/edit/VehicleEdit";
+import { EMPLOYEE, MANAGER } from "../common/utils/constants";
 
 function App() {
   return (
-    <div style={{ height: '93vh', width: '100vw'}}>
+    <div style={{ height: '93vh', width: '100vw' }}>
       <ToggleThemeButton />
       <Routes>
         <Route element={<Navbar />}>
@@ -31,6 +33,13 @@ function App() {
           </Route>
           <Route path='vehicles'>
             <Route index element={<VehicleDashboard />} />
+            <Route
+              path=':id/edit'
+              element={<PrivateRoute
+                roles={[MANAGER, EMPLOYEE]}
+                Component={VehicleEdit}
+              />}
+            />
             <Route path=':id' element={<VehicleDetails />} />
           </Route>
           <Route path='rents'>

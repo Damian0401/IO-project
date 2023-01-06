@@ -23,6 +23,13 @@ export interface VehicleDetails {
     price: number;
 }
 
+export interface VehicleEditValues {
+    yearOfProduction: number;
+    seats: number;
+    price: number;
+    description: string;
+}
+
 export interface VehicleForRent {
     id: string;
     model: string;

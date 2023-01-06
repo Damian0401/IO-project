@@ -29,7 +29,7 @@ export default function VehicleEdit() {
         if (vehicle && !userCanEdit(user, vehicle)) navigate('/');
     }, [vehicle, user, navigate])
 
-    const handleEdit = (vehicle: VehicleDetails) => {
+    const handleSave = (vehicle: VehicleDetails) => {
         if (!id) return;
 
         const editValues: VehicleEditValues = {
@@ -55,7 +55,7 @@ export default function VehicleEdit() {
                 <CardBody>
                     <Formik
                         initialValues={vehicle}
-                        onSubmit={handleEdit}
+                        onSubmit={handleSave}
                         validationSchema={Yup.object({
                             description: Yup.string()
                                 .required()
@@ -108,7 +108,7 @@ export default function VehicleEdit() {
                                             type='submit'
                                             colorScheme='blue'
                                         >
-                                            Edit
+                                            Save
                                         </Button>
                                         <Button
                                             onClick={() => navigate(-1)}

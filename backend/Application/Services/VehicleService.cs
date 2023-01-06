@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using Application.Constants;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
@@ -53,7 +54,11 @@ public class VehicleService : IVehicleService
 
         var department = _vehicleRepository.GetVehicleDepartment(id);
 
-        if (department is null || !department.ManagerId.Equals(user.Id))
+        if (department is null)
+            return false;
+
+        if (!user.Id.Equals(department.ManagerId) 
+            && !department.Employees.Any(x => x.Id.Equals(user.Id)))
             return false;
 
         var isUpdated = _vehicleRepository.UpdateVehicle(id, dto);

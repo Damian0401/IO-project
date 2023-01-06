@@ -170,10 +170,12 @@ public class VehicleRepository : IVehicleRepository
     public Department? GetVehicleDepartment(Guid vehicleId)
     {
         var department = _context
-            .Departments
-            .Include(x => x.Vehicles)
-            .FirstOrDefault(x => x.Vehicles
-                .Any(v => v.Id.Equals(vehicleId)));
+            .Vehicles
+            .Include(x => x.Department)
+            .ThenInclude(x => x.Employees)
+            .Where(x => x.Id.Equals(vehicleId))
+            .Select(x => x.Department)
+            .FirstOrDefault();
 
         return department;
     }

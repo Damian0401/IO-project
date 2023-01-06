@@ -37,7 +37,9 @@ public static class RestEndpointExtensions
             return Results.Ok(data);
         });
 
-        app.MapPost("/api/v1/vehicle", ([FromBody] CreateVehicleDtoRequest dto, IVehicleService service) =>
+        app.MapPost("/api/v1/vehicle", 
+        [Authorize(Roles=Roles.Manager)]
+        ([FromBody] CreateVehicleDtoRequest dto, IVehicleService service) =>
         {
             var isSuccess = service.CreateVehicle(dto);
 

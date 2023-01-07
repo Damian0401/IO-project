@@ -7,3 +7,5 @@ export const MANAGER = 'Manager';
 export const EMPLOYEE = 'Employee'
 
 export const CLIENT = 'Client'
+
+export const UNVERIFIED = 'Unverified';

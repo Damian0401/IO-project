@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default function VehicleFilters({ handleSearch }: Props) {
+    
     const [filters, setFilters] = useState<Filters>();
     const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
         {
@@ -22,14 +23,6 @@ export default function VehicleFilters({ handleSearch }: Props) {
         agent.Vehicle.getFilters().then(data => setFilters(data));
     }, []);
 
-    function handleDepartmentChange(e: ChangeEvent<HTMLSelectElement>): void {
-        setSelectedFilters({ ...selectedFilters, departmentId: e.target.value });
-    }
-
-    function handleModelChange(e: ChangeEvent<HTMLSelectElement>): void {
-        setSelectedFilters({ ...selectedFilters, modelId: e.target.value });
-    }
-
     function handleBrandChange(e: ChangeEvent<HTMLSelectElement>): void {
         if (!e.target.value)
             setSelectedFilters({ ...selectedFilters, brandId: undefined, modelId: undefined });
@@ -37,8 +30,16 @@ export default function VehicleFilters({ handleSearch }: Props) {
             setSelectedFilters({ ...selectedFilters, brandId: e.target.value });
     }
 
-    function handleFuelChange(e: ChangeEvent<HTMLSelectElement>): void {
-        setSelectedFilters({ ...selectedFilters, fuelId: e.target.value });
+    function handleSeatsChange(e: number): void {
+        setSelectedFilters({ ...selectedFilters, seats: e });
+    }
+
+    function handlePriceChange(e: number[]): void {
+        setSelectedFilters({ ...selectedFilters, minPrice: e[0], maxPrice: e[1] });
+    }
+
+    function handleSelectChange(e: ChangeEvent<HTMLSelectElement>) {
+        setSelectedFilters({ ...selectedFilters, [e.target.name]: e.target.value });
     }
 
     return (
@@ -47,9 +48,10 @@ export default function VehicleFilters({ handleSearch }: Props) {
                 <Flex p='1' gap='2' flexWrap='wrap'>
                     <Select
                         placeholder='Department'
-                        onChange={handleDepartmentChange}
+                        onChange={handleSelectChange}
                         minWidth='10rem'
                         maxWidth='15%'
+                        name='departmentId'
                     >
                         {filters.departments.map(d => (
                             <option key={d.id} value={d.id}>{d.name}</option>
@@ -75,9 +77,10 @@ export default function VehicleFilters({ handleSearch }: Props) {
                     </Flex>
                     <Select
                         placeholder='Fuel'
-                        onChange={handleFuelChange}
+                        onChange={handleSelectChange}
                         minWidth='6rem'
                         maxWidth='10%'
+                        name='fuelId'
                     >
                         {filters.fuels.map(f => (
                             <option key={f.id} value={f.id}>{f.type}</option>
@@ -87,6 +90,7 @@ export default function VehicleFilters({ handleSearch }: Props) {
                         minWidth='6rem'
                         maxWidth='10%'
                         placeholder='Brand'
+                        name='brandId'
                         onChange={handleBrandChange}
                     >
                         {filters.brands.map(b => (
@@ -96,9 +100,10 @@ export default function VehicleFilters({ handleSearch }: Props) {
                     <Select
                         placeholder='Model'
                         isDisabled={!selectedFilters.brandId}
-                        onChange={handleModelChange}
+                        onChange={handleSelectChange}
                         minWidth='6rem'
                         maxWidth='15%'
+                        name='modelId'
                     >
                         {selectedFilters.brandId && <>
                             {filters.brands
@@ -133,12 +138,4 @@ export default function VehicleFilters({ handleSearch }: Props) {
             </>}
         </>
     )
-
-    function handleSeatsChange(e: number): void {
-        return setSelectedFilters({ ...selectedFilters, seats: e });
-    }
-
-    function handlePriceChange(e: number[]): void {
-        return setSelectedFilters({ ...selectedFilters, minPrice: e[0], maxPrice: e[1] });
-    }
 }

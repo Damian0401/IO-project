@@ -10,7 +10,7 @@ import { VehicleDetails, VehicleEditValues } from "../../../app/models/Vehicle";
 import * as Yup from 'yup';
 import MyInput from "../../../app/common/form/MyInput";
 import { UserContext } from "../../../app/common/providers/UserProvider";
-import { userCanEdit } from "../../../app/common/utils/helpers";
+import { userCanEditVehicle } from "../../../app/common/utils/helpers";
 
 
 
@@ -26,7 +26,7 @@ export default function VehicleEdit() {
         }, [id]);
         
     useEffect(() => {
-        if (vehicle && !userCanEdit(user, vehicle)) navigate('/');
+        if (vehicle && !userCanEditVehicle(user, vehicle)) navigate('/');
     }, [vehicle, user, navigate])
 
     const handleSave = (vehicle: VehicleDetails) => {

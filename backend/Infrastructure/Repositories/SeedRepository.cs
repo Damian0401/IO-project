@@ -110,7 +110,7 @@ public class SeedRepository : ISeedRepository
         {
             new Department
             {
-                Name = "Never ending stort",
+                Name = "Never ending story",
                 Address = new Address
                 {
                     ApartmentNumber = "123",
@@ -481,10 +481,6 @@ public class SeedRepository : ISeedRepository
             new VehicleStatus
             {
                 Name = VehicleStatuses.Available
-            },
-            new VehicleStatus
-            {
-                Name = VehicleStatuses.Rented
             },
             new VehicleStatus
             {

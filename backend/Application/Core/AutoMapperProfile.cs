@@ -82,7 +82,7 @@ public class AutoMapperProfile : Profile
                 s.MapFrom(d => $"{d.Address.City}, {d.Address.Street}, " +
                     $"{d.Address.HouseNumber}/{d.Address.ApartmentNumber}"))
             .ForMember(x => x.Manager, s =>
-                s.MapFrom(d => $"{d.Manager.UserData.FirstName} {d.Manager.UserData.FirstName}"))
+                s.MapFrom(d => $"{d.Manager.UserData.FirstName} {d.Manager.UserData.LastName}"))
             .ForMember(x => x.Vehicles, s =>
                 s.MapFrom(d => d.Vehicles));
     }

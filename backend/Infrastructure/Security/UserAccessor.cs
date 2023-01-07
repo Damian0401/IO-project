@@ -16,7 +16,6 @@ namespace Infrastructure.Security
         {
             _contextAccessor = contextAccessor;
             _context = context;
-            
         }
 
         public User? GetCurrentlyLoggedUser()

@@ -62,13 +62,6 @@ public class AccountService : IAccountService
         var response = _mapper.Map<RegisterDtoResponse>(user);
         response.Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3));
         
-        new RegisterDtoResponse
-        {
-            Login = user.Login,
-            Token = _jwtGenerator.CreateToken(user, DateTime.Now.AddDays(3)),
-            Role = user.Role.Name
-        };
-
         return response;
     }
 

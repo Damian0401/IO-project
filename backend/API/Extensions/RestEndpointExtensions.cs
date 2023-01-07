@@ -111,7 +111,7 @@ public static class RestEndpointExtensions
             var response = service.Login(dto);
 
             if (response is null)
-                return Results.BadRequest();
+                return Results.Unauthorized();
 
             return Results.Ok(response);
         });

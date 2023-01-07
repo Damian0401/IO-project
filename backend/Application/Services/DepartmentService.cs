@@ -22,9 +22,10 @@ namespace Application.Services
         {
             var departments = _departmentRepository.GetAllDepartments();
 
+            var mappedDepartments = _mapper.Map<List<DepartmentForGetAllDepartmentsDtoResponse>>(departments);
             var response = new GetAllDepartmentsDtoResponse
             {
-                Departments = _mapper.Map<List<DepartmentForGetAllDepartmentsDtoResponse>>(departments)
+                Departments = mappedDepartments
             };
 
             return response;

@@ -114,7 +114,7 @@ export default function VehicleEdit() {
                                             onClick={() => navigate(-1)}
                                             colorScheme='teal'
                                         >
-                                            Back
+                                            Cancel
                                         </Button>
                                     </ButtonGroup>
                                 </Flex>

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Flex, Heading, IconButton, Spacer, Stack, StackDivider, Text, Tooltip } from "@chakra-ui/react";
+import { ButtonGroup, Flex, Heading, IconButton, Stack, StackDivider, Text, Tooltip } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import VehicleList from "../../vehicle/list/VehicleList";
 import { DepartmentDetails as Department } from "../../../app/models/Department";
@@ -10,6 +10,7 @@ import agent from "../../../app/api/agent";
 import { AddIcon, CalendarIcon, EditIcon } from "@chakra-ui/icons";
 import { userCanCreateVehicle, userCanManageEmployees, userCanManageRents } from "../../../app/common/utils/helpers";
 import { UserContext } from "../../../app/common/providers/UserProvider";
+import { Link } from "react-router-dom";
 
 export default function DepartmentDetails() {
 
@@ -42,10 +43,14 @@ export default function DepartmentDetails() {
                         </Text>
                         <Flex>
                             <ButtonGroup>
-                                {userCanCreateVehicle(user, department) && <Tooltip label='Add a new vehicle' >
-                                    <IconButton aria-label="add-button" icon={<AddIcon />} />
+                                {userCanCreateVehicle(user, department?.id) && <Tooltip label='Add a new vehicle' >
+                                    <IconButton
+                                        aria-label="add-button"
+                                        icon={<AddIcon />}
+                                        as={Link} to={`/vehicles/create/${department.id}`}
+                                    />
                                 </Tooltip>}
-                                {userCanManageEmployees(user, department) && <Tooltip label='Manage employees' >
+                                {userCanManageEmployees(user, department?.id) && <Tooltip label='Add an employee' >
                                     <IconButton aria-label="manage-button" icon={<EditIcon />} />
                                 </Tooltip>}
                                 {userCanManageRents(user, department) && <Tooltip label='Manage rents' >

@@ -13,12 +13,12 @@ export const userCanEditVehicle = (user?: User, vehicle?: VehicleDetails) =>
 
 export const userCanRentVehicle = (user?: User) =>  user?.role === CLIENT;
 
-export const userCanCreateVehicle = (user?: User, department?: DepartmentDetails) =>
-    user?.role === MANAGER && department && user.departmentIds.includes(department.id);
+export const userCanCreateVehicle = (user?: User, departmentId?: string) =>
+    user?.role === MANAGER && departmentId && user.departmentIds.includes(departmentId);
     
-    export const userCanManageRents = (user?: User, department?: DepartmentDetails) =>
+export const userCanManageRents = (user?: User, department?: DepartmentDetails) =>
     (user?.role === MANAGER || user?.role === EMPLOYEE) && department 
     && user.departmentIds.includes(department.id);
     
-export const userCanManageEmployees = (user?: User, department?: DepartmentDetails) =>
-    user?.role === MANAGER && department && user.departmentIds.includes(department.id);
+export const userCanManageEmployees = (user?: User, departmentId?: string) =>
+    user?.role === MANAGER && departmentId && user.departmentIds.includes(departmentId);

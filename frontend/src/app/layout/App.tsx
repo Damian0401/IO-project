@@ -16,6 +16,7 @@ import PrivateRoute from "../common/shared/PrivateRoute";
 import AnonymousRoute from "../common/shared/AnonymousRoute";
 import VehicleEdit from "../../features/vehicle/edit/VehicleEdit";
 import { EMPLOYEE, MANAGER } from "../common/utils/constants";
+import VehicleCreate from "../../features/vehicle/create/VehicleCreate";
 
 function App() {
   return (
@@ -34,7 +35,14 @@ function App() {
           <Route path='vehicles'>
             <Route index element={<VehicleDashboard />} />
             <Route
-              path=':id/edit'
+              path='create/:departmentId'
+              element={<PrivateRoute
+                roles={[MANAGER]}
+                Component={VehicleCreate}
+              />}
+            />
+            <Route
+              path='edit/:id'
               element={<PrivateRoute
                 roles={[MANAGER, EMPLOYEE]}
                 Component={VehicleEdit}

@@ -85,7 +85,7 @@ export default function VehicleDetails() {
                             {userCanEditVehicle(user, vehicle) && <Button
                                 colorScheme='blue'
                                 as={Link}
-                                to={`/vehicles/${vehicle.id}/edit`}
+                                to={`/vehicles/edit/${vehicle.id}`}
                             >
                                 Edit
                             </Button>}

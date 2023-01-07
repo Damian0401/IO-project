@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import agent from "../../../app/api/agent";
 import { UserContext } from "../../../app/common/providers/UserProvider";
 import ContentCard from "../../../app/common/shared/ContentCard";
-import { userCanDelete, userCanEdit, userCanRent } from "../../../app/common/utils/helpers";
+import { userCanDeleteVehicle, userCanEditVehicle, userCanRentVehicle } from "../../../app/common/utils/helpers";
 import LoadingSpinner from "../../../app/layout/LoadingSpinner";
 import { VehicleDetails as Vehicle } from "../../../app/models/Vehicle";
 
@@ -79,17 +79,17 @@ export default function VehicleDetails() {
                     </GridItem>
                     <GridItem colSpan={5} position='relative'>
                         {user && <ButtonGroup position='absolute' bottom='0' right='0'>
-                            {userCanDelete(user, vehicle) && <Button colorScheme='red' onClick={handleDelete}>
+                            {userCanDeleteVehicle(user, vehicle) && <Button colorScheme='red' onClick={handleDelete}>
                                 Delete
                             </Button>}
-                            {userCanEdit(user, vehicle) && <Button
+                            {userCanEditVehicle(user, vehicle) && <Button
                                 colorScheme='blue'
                                 as={Link}
                                 to={`/vehicles/${vehicle.id}/edit`}
                             >
                                 Edit
                             </Button>}
-                            {userCanRent(user) && <Button colorScheme='teal'>
+                            {userCanRentVehicle(user) && <Button colorScheme='teal'>
                                 Rent
                             </Button>}
                         </ButtonGroup>}

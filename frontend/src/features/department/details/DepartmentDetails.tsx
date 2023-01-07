@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import LoadingSpinner from "../../../app/layout/LoadingSpinner";
 import agent from "../../../app/api/agent";
 import { AddIcon, CalendarIcon, EditIcon } from "@chakra-ui/icons";
-import { userCanCreate, userCanManageEmployees, userCanManageRents } from "../../../app/common/utils/helpers";
+import { userCanCreateVehicle, userCanManageEmployees, userCanManageRents } from "../../../app/common/utils/helpers";
 import { UserContext } from "../../../app/common/providers/UserProvider";
 
 export default function DepartmentDetails() {
@@ -42,7 +42,7 @@ export default function DepartmentDetails() {
                         </Text>
                         <Flex>
                             <ButtonGroup>
-                                {userCanCreate(user, department) && <Tooltip label='Add a new vehicle' >
+                                {userCanCreateVehicle(user, department) && <Tooltip label='Add a new vehicle' >
                                     <IconButton aria-label="add-button" icon={<AddIcon />} />
                                 </Tooltip>}
                                 {userCanManageEmployees(user, department) && <Tooltip label='Manage employees' >

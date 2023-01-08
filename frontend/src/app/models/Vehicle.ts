@@ -13,7 +13,7 @@ export interface VehicleDetails {
     model: string;
     brand: string;
     yearOfProduction: number;
-    imageUrl: string;
+    imageUrl?: string;
     fuel: string;
     seats: number;
     description: string;
@@ -28,6 +28,20 @@ export interface VehicleEditValues {
     seats: number;
     price: number;
     description: string;
+    imageUrl?: string;
+}
+
+export interface VehicleCreateValues {
+    description: string;
+    imageUrl?: string;
+    registration: string;
+    vin: string;
+    seats: number;
+    yearOfProduction: number;
+    price: number;
+    modelId: string;
+    departmentId: string;
+    fuelId: string;
 }
 
 export interface VehicleForRent {

@@ -36,7 +36,6 @@ export default function VehicleDetails() {
         <>
             <ContentCard>
                 <Grid
-                    minHeight='30vh'
                     templateRows='repeat(5, 1fr)'
                     templateColumns='repeat(5, 1fr)'
                     gap={3}

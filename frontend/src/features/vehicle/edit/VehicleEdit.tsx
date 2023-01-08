@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import MyInput from "../../../app/common/form/MyInput";
 import { UserContext } from "../../../app/common/providers/UserProvider";
 import { userCanEditVehicle } from "../../../app/common/utils/helpers";
+import MyNumberInput from "../../../app/common/form/MyNumberInput";
 
 
 
@@ -32,12 +33,15 @@ export default function VehicleEdit() {
     const handleSave = (vehicle: VehicleDetails) => {
         if (!id) return;
 
+        
         const editValues: VehicleEditValues = {
             description: vehicle.description,
             price: vehicle.price,
             seats: vehicle.seats,
-            yearOfProduction: vehicle.yearOfProduction
+            yearOfProduction: vehicle.yearOfProduction,
+            imageUrl: vehicle.imageUrl
         };
+        console.log(editValues)
         agent.Vehicle.update(id, editValues).then(() => navigate(-1));
     }
 
@@ -63,9 +67,12 @@ export default function VehicleEdit() {
                             yearOfProduction: Yup.number()
                                 .required(),
                             seats: Yup.string()
-                                .required(),
-                            price: Yup.number()
                                 .required()
+                                .max(10)
+                                .min(1),
+                            price: Yup.number()
+                                .required(),
+                            imageUrl: Yup.string(),
                         })}
                     >
                         {({ handleSubmit, errors, touched }) => (
@@ -86,13 +93,12 @@ export default function VehicleEdit() {
                                     type="number"
                                     isRequired={true}
                                     />
-                                <MyInput
-                                    label="Seats"
-                                    name="seats"
+                                <MyNumberInput 
+                                    isRequired={true}
+                                    label='Seats'
+                                    name='seats'
                                     errors={errors.seats}
                                     touched={touched.seats}
-                                    type="number"
-                                    isRequired={true}
                                 />
                                 <MyInput
                                     label="PricePerDay"
@@ -101,6 +107,13 @@ export default function VehicleEdit() {
                                     touched={touched.price}
                                     type="number"
                                     isRequired={true}
+                                />
+                                <MyInput
+                                    label="ImageUrl"
+                                    name="imageUrl"
+                                    errors={errors.imageUrl}
+                                    touched={touched.imageUrl}
+                                    type="text"
                                 />
                                 <Flex pt='2'>
                                     <ButtonGroup>

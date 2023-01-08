@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { BASE_API_URL } from "../common/utils/constants";
 import { Department as DepartmentDto, DepartmentDetails, DepartmentMarker } from "../models/Department";
 import { User, UserLoginValues, UserRegisterValues } from "../models/User";
-import { Vehicle as VehicleDto, VehicleDetails, VehicleEditValues, VehicleFilters } from "../models/Vehicle";
+import { Vehicle as VehicleDto, VehicleCreateValues, VehicleDetails, VehicleEditValues, VehicleFilters } from "../models/Vehicle";
 
 
 axios.defaults.baseURL = BASE_API_URL;
@@ -36,6 +36,7 @@ const Vehicle = {
     getFilters: () => requests.get<VehicleFilters>('/vehicle/filters'),
     delete: (id: string) => requests.delete(`/vehicle/${id}`),
     update: (id: string, vehicle: VehicleEditValues) => requests.put(`/vehicle/${id}`, vehicle),
+    create: (vehicle: VehicleCreateValues) => requests.post('/vehicle', vehicle),
 };
 
 const Account = {

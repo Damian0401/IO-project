@@ -128,10 +128,10 @@ public class VehicleRepository : IVehicleRepository
             .Find(id);
     }
 
-    public Brand? GetModelById(Guid id)
+    public Model? GetModelById(Guid id)
     {
         return _context
-            .Brands
+            .Models
             .Find(id);
     }
 
@@ -205,6 +205,7 @@ public class VehicleRepository : IVehicleRepository
         vehicle.Description = dto.Description;
         vehicle.Seats = dto.Seats;
         vehicle.YearOfProduction = dto.YearOfProduction;
+        vehicle.ImageUrl = dto.ImageUrl;
 
         var isUpdated = _context.SaveChanges() > 0;
         return isUpdated;

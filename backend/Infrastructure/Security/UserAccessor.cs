@@ -28,9 +28,11 @@ namespace Infrastructure.Security
             if (userId is null)
                 return null;
 
+            var userIdAsGuid = Guid.Parse(userId);
+
             var user = _context.Users
                 .Include(x => x.Role)
-                .FirstOrDefault(x => x.Id.Equals(Guid.Parse(userId)));
+                .FirstOrDefault(x => x.Id.Equals(userIdAsGuid));
 
             return user;
         }

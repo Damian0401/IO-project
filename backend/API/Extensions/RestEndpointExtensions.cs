@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Constants;
 using Application.Dtos.Account;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
-using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +13,8 @@ public static class RestEndpointExtensions
     {
         app.MapGet("/", () => "Hello World!");
 
-        app.MapPost("/seed", (ISeedRepository seedRepository) =>
+        app.MapPost("/seed", 
+        (ISeedRepository seedRepository) =>
         {
             seedRepository.SeedRoles();
             seedRepository.SeedFuels();
@@ -30,7 +26,8 @@ public static class RestEndpointExtensions
             return Results.Ok();
         });
 
-        app.MapGet("/api/v1/vehicle/filters", (IVehicleService service) =>
+        app.MapGet("/api/v1/vehicle/filters", 
+        (IVehicleService service) =>
         {
             var data = service.GetVehicleFilterData();
 
@@ -48,14 +45,16 @@ public static class RestEndpointExtensions
             : Results.BadRequest();
         });
 
-        app.MapGet("/api/v1/vehicle", (GetFilteredVehiclesDtoRequest dto, IVehicleService service) =>
+        app.MapGet("/api/v1/vehicle", 
+        (GetFilteredVehiclesDtoRequest dto, IVehicleService service) =>
         {
             var response = service.GetFilteredVehicles(dto);
 
             return Results.Ok(response);
         });
 
-        app.MapGet("/api/v1/vehicle/{id:guid}", ([FromRoute] Guid id, IVehicleService service) =>
+        app.MapGet("/api/v1/vehicle/{id:guid}", 
+        ([FromRoute] Guid id, IVehicleService service) =>
         {
             var response = service.GetVehicleById(id);
 
@@ -89,14 +88,16 @@ public static class RestEndpointExtensions
             return Results.Ok();
         });
 
-        app.MapGet("/api/v1/department", (IDepartmentService service) =>
+        app.MapGet("/api/v1/department", 
+        (IDepartmentService service) =>
         {
             var response = service.GetAllDepartments();
 
             return Results.Ok(response);
         });
 
-        app.MapGet("/api/v1/department/{id:guid}", (Guid id, IDepartmentService service) =>
+        app.MapGet("/api/v1/department/{id:guid}", 
+        (Guid id, IDepartmentService service) =>
         {
             var response = service.GetDepartmentById(id);
 
@@ -106,7 +107,8 @@ public static class RestEndpointExtensions
             return Results.Ok(response);
         });
 
-        app.MapPost("/api/v1/account/login", (LoginDtoRequest dto, IAccountService service) =>
+        app.MapPost("/api/v1/account/login", 
+        (LoginDtoRequest dto, IAccountService service) =>
         {
             var response = service.Login(dto);
 
@@ -116,7 +118,8 @@ public static class RestEndpointExtensions
             return Results.Ok(response);
         });
 
-        app.MapPost("/api/v1/account/register", (RegisterDtoRequest dto, IAccountService service) =>
+        app.MapPost("/api/v1/account/register", 
+        (RegisterDtoRequest dto, IAccountService service) =>
         {
             var response = service.Register(dto);
 

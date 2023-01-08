@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Core;
 using Application.Interfaces;
 using Application.Services;
 using Infrastructure.Repositories;
-using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 

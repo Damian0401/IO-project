@@ -1,5 +1,3 @@
-using System.Reflection.Metadata;
-using Application.Constants;
 using Application.Dtos.Vehicle;
 using Application.Interfaces;
 using AutoMapper;
@@ -25,9 +23,10 @@ public class VehicleService : IVehicleService
         var vehicles = _vehicleRepository
             .GetFilteredVehicles(dto);
 
+        var mappedVehicles = _mapper.Map<List<VehicleForGetFilteredVehiclesDtoResponse>>(vehicles);
         var response = new GetFilteredVehiclesDtoResponse
         {
-            Vehicles = _mapper.Map<List<VehicleForGetFilteredVehiclesDtoResponse>>(vehicles)
+            Vehicles = mappedVehicles
         };
 
         return response;
@@ -57,8 +56,7 @@ public class VehicleService : IVehicleService
         if (department is null)
             return false;
 
-        if (!user.Id.Equals(department.ManagerId) 
-            && !department.Employees.Any(x => x.Id.Equals(user.Id)))
+        if (!user.Id.Equals(department.ManagerId) && !department.Employees.Any(x => x.Id.Equals(user.Id)))
             return false;
 
         var isUpdated = _vehicleRepository.UpdateVehicle(id, dto);
@@ -109,11 +107,15 @@ public class VehicleService : IVehicleService
         var brands = _vehicleRepository.GetAllBrands();
         var departments = _vehicleRepository.GetAllDepartments();
 
+        var mappedFuels = _mapper.Map<List<FuelForGetVehicleFilterDataDtoResponse>>(fuels);
+        var mappedBrands = _mapper.Map<List<BrandForGetVehicleFilterDataDtoResponse>>(brands);
+        var mappedDepartments = _mapper.Map<List<DepartmentForGetVehicleFilterDataDtoResponse>>(departments);
+        
         var response = new GetVehicleFilterDataDtoResponse
         {
-            Brands = _mapper.Map<List<BrandForGetVehicleFilterDataDtoResponse>>(brands),
-            Fuels = _mapper.Map<List<FuelForGetVehicleFilterDataDtoResponse>>(fuels),
-            Departments = _mapper.Map<List<DepartmentForGetVehicleFilterDataDtoResponse>>(departments),
+            Fuels = mappedFuels,
+            Brands = mappedBrands,
+            Departments = mappedDepartments,
         };
 
         return response;
